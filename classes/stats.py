@@ -9,6 +9,11 @@ class Stats:
         self.expertise = expertise
         self.resistence = resistence
         self.hp = hp
+        self.stats_array = [self.strength, self.agility, self.expertise, self.resistence, self.hp]
+
+    @classmethod
+    def get_stats_quantity(cls):
+        return 5
 
     def get_strength(self):
         return 100 * tanh(0.01 * self.strength)

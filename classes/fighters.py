@@ -29,7 +29,7 @@ class Fighter(ABC):
 
 
 class Warrior(Fighter):
-    def __init__(self, stats, attack_lambda, height):
+    def __init__(self, stats, height):
         super().__init__(0.6, stats, height)
 
 
