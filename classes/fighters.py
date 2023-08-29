@@ -8,6 +8,7 @@ def check_valid_height(height):
 
 
 class Fighter(ABC):
+    @abstractmethod
     def __init__(self, attack_lambda, stats, height):
         self.attack_lambda = attack_lambda
         self.defense_lambda = 1 - self.attack_lambda

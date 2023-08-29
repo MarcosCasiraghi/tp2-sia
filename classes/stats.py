@@ -1,5 +1,4 @@
-import math
-
+from math import tanh
 POINTS = 150
 
 
@@ -12,19 +11,19 @@ class Stats:
         self.hp = hp
 
     def get_strength(self):
-        return 100 * math.tanh(0.01 * self.strength)
+        return 100 * tanh(0.01 * self.strength)
 
     def get_agility(self):
-        return math.tanh(0.01 * self.agility)
+        return tanh(0.01 * self.agility)
 
     def get_expertise(self):
-        return 0.6 * math.tanh(0.01 * self.expertise)
+        return 0.6 * tanh(0.01 * self.expertise)
 
     def get_resistence(self):
-        return math.tanh(0.01 * self.resistence)
+        return tanh(0.01 * self.resistence)
 
     def get_hp(self):
-        return math.tanh(0.01 * self.hp)
+        return tanh(0.01 * self.hp)
 
     def check_valid(self):
         return self.strength + self.agility + self.expertise + self.resistence + self.hp == POINTS
