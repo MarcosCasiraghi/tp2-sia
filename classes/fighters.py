@@ -58,6 +58,9 @@ class Fighter(ABC):
     def get_hp(self):
         return tanh(0.01 * self.hp)
 
+    def get_stats_array(self):
+        return ([self.strength,self.agility,self.expertise,self.resistence,self.hp], self.height) # obtener datos como listaAtributos, altura = instancia.get_stats_array()
+
     def check_valid(self):
         return self.strength + self.agility + self.expertise + self.resistence + self.hp == POINTS
 
