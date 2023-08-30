@@ -65,7 +65,10 @@ class Fighter(ABC):
         return self.strength + self.agility + self.expertise + self.resistence + self.hp == POINTS
 
     def __str__(self):
-        return f"strength: {self.strength}, agility: {self.agility}, expertise: {self.expertise}, resistance: {self.resistence}, hp: {self.hp}, height: {self.height}"
+        return f"strength: {self.strength}, agility: {self.agility}, expertise: {self.expertise}, resistance: {self.resistence}, hp: {self.hp}, height: {self.height}, performance: {self.get_performance()}"
+
+    def __lt__(self, other):
+        return self.get_performance() < other.get_performance()
 
 
 class Warrior(Fighter):
