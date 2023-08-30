@@ -9,9 +9,9 @@ def check_valid_height(height):
 
 class Fighter(ABC):
     @abstractmethod
-    def __init__(self, attack_lambda, stats, height):
+    def __init__(self, attack_lambda, defence_lambda, stats, height):
         self.attack_lambda = attack_lambda
-        self.defense_lambda = 1 - self.attack_lambda
+        self.defense_lambda = defence_lambda
         self.performance = self.get_performance()
         self.stats = stats
         if not check_valid_height(height):
@@ -36,19 +36,19 @@ class Fighter(ABC):
 
 class Warrior(Fighter):
     def __init__(self, stats, height):
-        super().__init__(0.6, stats, height)
+        super().__init__(0.6, 0.4, stats, height)
 
 
 class Archer(Fighter):
     def __init__(self, stats, height):
-        super().__init__(0.9, stats, height)
+        super().__init__(0.9, 0.1, stats, height)
 
 
 class Defensor(Fighter):
     def __init__(self, stats, height):
-        super().__init__(0.1, stats, height)
+        super().__init__(0.1, 0.9, stats, height)
 
 
 class Infilitrate(Fighter):
     def __init__(self, stats, height):
-        super().__init__(0.8, stats, height)  # todo ver si se confundio con el 0.3
+        super().__init__(0.8, 0.3, stats, height)
