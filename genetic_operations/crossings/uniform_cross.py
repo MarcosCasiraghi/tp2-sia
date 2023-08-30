@@ -42,15 +42,13 @@ def uniform_cross(selected_fighters_list):
 
     childList = []
     list_length = len(selected_fighters_list)
-    for i in range(list_length,2):
+    for i in range(0,list_length,2):
         parent1 = selected_fighters_list[i]
         parent2 = selected_fighters_list[(i + 1) % list_length] # por si la lista es impar
         child1, child2 = uniform_cross_parents(parent1,parent2)
         childList.append(child1)
         childList.append(child2)
     return childList
-
-
 
 
 

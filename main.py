@@ -2,7 +2,8 @@ import json
 import random
 from classes.fighters import *
 from classes.generation import *
-
+from selection_algorithms.elite import *
+from genetic_operations.crossings.uniform_cross import uniform_cross
 # # la idea aca es levantar la configuracion de un JSON y cambiar la funcion create_fighter por el constructor adecuado
 # create_fighter = lambda stats, height: Warrior(stats, height)
 
@@ -53,9 +54,11 @@ def main():
 
     # Ciclo con criterio de corte
 
-        # Hacemos la seleccion
+    # Hacemos la seleccion
+    selected = elite_selection(10,zero)
 
-        # Hacemos el cruce
+    # Hacemos el cruce
+    
 
         # Hacemos la mutacion
 
