@@ -1,0 +1,17 @@
+{
+  "class": "Warrior",
+
+  "generation_size": 50,
+
+  "selection_method1": "",
+  "selection_method2": "",
+
+  "crossover_method": "",
+
+  "mutation_method": "",
+
+  "replacement_method1": "",
+  "replacement_method2": "",
+
+  "cutoff_criteria": {}
+}
