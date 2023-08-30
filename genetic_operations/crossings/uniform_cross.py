@@ -1,5 +1,6 @@
 from classes.fighters import *
 from random import random
+from classes.generation import *
 from utils.fighter_creation import get_fighter_class
 
 
@@ -37,15 +38,22 @@ def uniform_cross_parents(parent1:Fighter , parent2: Fighter):
 
 
 
+def uniform_cross(selected_fighters_list):
 
-fighter1 = Archer(20,10,50,20,50,1.89)
-fighter2 = Archer(10,20,20,60,40,1.32)
+    childList = []
+    list_length = len(selected_fighters_list)
+    for i in range(list_length,2):
+        parent1 = selected_fighters_list[i]
+        parent2 = selected_fighters_list[(i + 1) % list_length] # por si la lista es impar
+        child1, child2 = uniform_cross_parents(parent1,parent2)
+        childList.append(child1)
+        childList.append(child2)
+    return childList
 
 
-h1, h2 = uniform_cross_parents(fighter1,fighter2)
 
-print(h1)
-print(h2)
+
+
 
 
 
