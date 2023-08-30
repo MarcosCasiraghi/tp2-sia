@@ -17,17 +17,6 @@ class_map = {
 NUM_ATTRIBUTES = 5
 MAX_POINTS = 150
 
-def scale_array_to_sum(arr, desired_sum):
-    initial_sum = sum(arr)
-    scaling_factor = desired_sum / initial_sum
-
-    scaled_array = [num * scaling_factor for num in arr]
-
-    # Ajustamos por los errores de redondeo
-    sum_difference = desired_sum - sum(scaled_array)
-    scaled_array[-1] += sum_difference
-
-    return scaled_array
 
 
 def gen_random_character(config):
@@ -37,8 +26,8 @@ def gen_random_character(config):
         value = random.uniform(0, MAX_POINTS)
         attributes.append(value)
 
-    # Normalizamos a que la suma sea 150
-    scaled = scale_array_to_sum(attributes, MAX_POINTS)
+    # Normalizamos a que la suma sea 150, ya lo declara scale_array_to_sum
+    scaled = scale_array_to_sum(attributes)
 
     height = random.uniform(1.3, 2)
 

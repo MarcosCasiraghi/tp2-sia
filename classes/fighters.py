@@ -10,6 +10,18 @@ def check_valid_height(height):
     return 1.3 <= height <= 2.0
 
 
+def scale_array_to_sum(arr):
+    initial_sum = sum(arr)
+    scaling_factor = POINTS / initial_sum
+
+    scaled_array = [num * scaling_factor for num in arr]
+
+    # Ajustamos por los errores de redondeo
+    sum_difference = POINTS - sum(scaled_array)
+    scaled_array[-1] += sum_difference
+
+    return scaled_array
+
 class Fighter(ABC):
     @abstractmethod
     def __init__(self, attack_lambda, defence_lambda, strength, agility, expertise, resistence, hp, height):
@@ -27,6 +39,7 @@ class Fighter(ABC):
         self.height = height
 
         self.performance = self.get_performance()
+
 
     def get_performance(self):
         return self.attack_lambda * self.get_attack() + self.defense_lambda * self.get_defense()
