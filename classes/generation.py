@@ -10,4 +10,4 @@ class Generation(list):
         Generation.class_number += 1
 
     def new_empty_generation(self):
-        return self.__init__(self.generation_number + 1)
+        return self.__init__()
