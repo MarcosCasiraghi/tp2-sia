@@ -2,9 +2,12 @@
 # para crear nuevas generaciones usamos new_empty_generation asi el numero se aumenta solo
 
 class Generation(list):
-    def __init__(self, generation_number = 0):
+    class_number = 0
+
+    def __init__(self):
         super().__init__()
-        self.generation_number = generation_number
+        self.generation_number = Generation.class_number
+        Generation.class_number += 1
 
     def new_empty_generation(self):
         return self.__init__(self.generation_number + 1)
