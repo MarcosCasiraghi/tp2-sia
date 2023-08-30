@@ -71,6 +71,55 @@ class Fighter(ABC):
     def get_hp(self):
         return tanh(0.01 * self.hp)
 
+    def get_gene_by_idx(self, idx):
+
+        # TODO: check. Creo que es mas eficiente que hacer una lista y despues obtener el valor por indice
+
+        if idx == 0:
+            return self.strength
+        elif idx == 1:
+            return self.agility
+        elif idx == 2:
+            return self.expertise
+        elif idx == 3:
+            return self.resistence
+        elif idx == 4:
+            return self.hp
+        elif idx == 5:
+            return self.height
+
+    def set_gene_by_idx(self, idx, value):
+
+        # TODO: check. Creo que es mas eficiente que hacer una lista y despues obtener el valor por indice
+
+        if idx == 0:
+            self.strength = value
+        elif idx == 1:
+            self.agility = value
+        elif idx == 2:
+            self.expertise = value
+        elif idx == 3:
+            self.resistence = value
+        elif idx == 4:
+            self.hp = value
+        elif idx == 5:
+            self.height = value
+
+    # TODO: muy cabeza esto, arreglar en algun momento
+    def readjust_genes(self):
+        # Reajustamos la altura
+        if self.height > 2.0:
+            self.height = 2.0
+        elif self.height < 1.3:
+            self.height = 1.3
+
+        # Reajustamos los otros genes
+        current_genes = [self.strength, self.agility, self.expertise, self.resistence, self.hp]
+        scaled = scale_array_to_sum(current_genes)
+
+        for idx, value in enumerate(scaled):
+            self.set_gene_by_idx(idx, value)
+
     def get_stats_array(self):
         return ([self.strength,self.agility,self.expertise,self.resistence,self.hp], self.height) # obtener datos como listaAtributos, altura = instancia.get_stats_array()
 
