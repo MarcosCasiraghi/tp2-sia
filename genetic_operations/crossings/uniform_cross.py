@@ -2,7 +2,7 @@ from classes.fighters import *
 from random import random
 from classes.generation import *
 from utils.fighter_creation import get_fighter_class
-from genetic_operations.crossings.cross_population import cross_population
+from genetic_operations.crossings.cross_utils import cross_population
 
 
 # self.strength = strength

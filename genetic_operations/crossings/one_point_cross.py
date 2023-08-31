@@ -1,8 +1,8 @@
 from random import randint
 from classes.fighters import *
 from utils.fighter_creation import get_fighter_class
-from genetic_operations.crossings.cross_population import cross_population
-
+from genetic_operations.crossings.cross_utils import cross_population
+from genetic_operations.crossings.anular_cross import get_crossing_data
 
 # self.strength = strength
 # self.agility = agility
@@ -12,11 +12,8 @@ from genetic_operations.crossings.cross_population import cross_population
 
 
 def one_point_cross_parents(parent1: Fighter, parent2: Fighter, recievedPoint=0):
-    parent1arr = [parent1.strength, parent1.agility, parent1.expertise, parent1.resistence, parent1.hp, parent1.height]
-    parent2arr = [parent2.strength, parent2.agility, parent2.expertise, parent2.resistence, parent2.hp, parent2.height]
 
-    array_length = len(parent1arr)
-    recievedPoint = randint(0, array_length - 1)
+    parent1arr, parent2arr , recievedPoint, array_length = get_crossing_data(parent1,parent2)
 
     for i in range(recievedPoint, array_length):
         parent1arr[i], parent2arr[i] = parent2arr[i], parent1arr[i]
