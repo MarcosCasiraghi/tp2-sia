@@ -1,37 +1,23 @@
 import random
-from enum import Enum
-from classes.fighters import Fighter
-
-
-class Genes(Enum):
-    STRENGTH = 0
-    AGILITY = 1
-    EXPERTISE = 2
-    RESISTANCE = 3
-    HP = 4
-    HEIGHT = 5
+from classes.fighters import *
+from genetic_operations.mutations.gene_utils import gene_delta, mutate_gene
 
 
 def mutate_single_gene(character: Fighter, config):
-    change = random.randint(0, 1) # 1 incrementa y 0 es decrementa
-    if change == 1:
-        delta = 1
-    else:
-        delta = -1
 
-    gene_to_mutate = random.randint(0, len(Genes))
+    # Primero vemos si le toca mutar
+    pm = config["mutation_prob"]
+    if random.random() >= pm:
+        return
 
-    # No es muy lindo asi, pero creo que es lo mas eficiente
+    delta = gene_delta()
 
-    if gene_to_mutate == Genes.HEIGHT:
-        new_height = character.height * (1 + delta * config["mutation_change"])
+    # Mutamos un gen random
+    gene_to_mutate = random.randint(0, len(Genes) - 1)
 
-        character.height = new_height
+    mutation_change = config["mutation_change"]
 
-    else:   # Caso: muto los genes regulados por el maximo de 150
-        old = character.get_gene_by_idx(gene_to_mutate)
-        new_value = old * (1 + delta * config["mutation_change"])
+    mutate_gene(character, gene_to_mutate, mutation_change)
 
-        character.set_gene_by_idx(gene_to_mutate, new_value)
-
+    # Reajustamos los genes por si quedo fuera de los valores aceptados
     character.readjust_genes()

@@ -1,9 +1,17 @@
 # abstract base class work
 from abc import ABC, abstractmethod
+from enum import Enum
 from math import pow, tanh
 
 POINTS = 150
 
+class Genes(Enum):
+    STRENGTH = 0
+    AGILITY = 1
+    EXPERTISE = 2
+    RESISTANCE = 3
+    HP = 4
+    HEIGHT = 5
 
 def check_valid_height(height):
     return 1.3 <= height <= 2.0
