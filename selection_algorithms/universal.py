@@ -1,4 +1,5 @@
 from classes.generation import Generation
+from roulette import relative_fitness, accumulative_fitness
 from random import random
 
 
@@ -23,20 +24,15 @@ def universal_selection(amount_to_select, gen: Generation):
         r_j.append((r+k)/amount_to_select)
         k += 1
     #fitness para cada pj
-    for elem in gen:
-        fitness = elem.get_perfomance()
-        individual_ft.append(fitness)
-        total_ft += fitness
+
+    individual_ft, total_ft = individual_fitness(gen)
+
     #fitness relativo para cada pj
-    for item in individual_ft:
-        relative_ft.append(item/total_ft)
+
+    relative_ft = relative_fitness(individual_ft, total_ft)
 
     #fitness acumulado
-    for i in range(len(relative_ft)):
-        if i == 0:
-            accumulated_ft.append(relative_ft[i])
-        else:
-            accumulated_ft.append(relative_ft[i] + relative_ft[i-1])
+    accumulated_ft = accumulative_fitness(relative_ft)
     #seleccion de pjs
     i = 0
     r_index = 0
@@ -48,3 +44,14 @@ def universal_selection(amount_to_select, gen: Generation):
                 break
 
     return selected_pjs
+
+def individual_fitness(gen: Generation):
+    individual_fitness = []
+    total_fitness = 0
+    for elem in gen:
+        fitness = elem.get_perfomance()
+        individual_fitness.append(fitness)
+        total_fitness += fitness
+
+    return (individual_fitness, total_fitness)
+
