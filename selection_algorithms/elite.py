@@ -11,6 +11,3 @@ def elite_selection(amount_to_select, generation: Generation):
         selection.append(generation[i % gen_size])
 
     return selection
-
-
-
