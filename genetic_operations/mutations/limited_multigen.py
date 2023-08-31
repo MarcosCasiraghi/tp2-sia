@@ -10,13 +10,15 @@ def mutate_limited_multi_gen(character: Fighter, config):
     if random.random() >= pm:
         return
 
+    num_genes_to_mutate = random.randint(1, len(Genes))
+
+    genes = [0, 1, 2, 3, 4, 5]
     # Generamos cuantos genes se van a mutar
-    gene_mutation_range = random.randint(0, len(Genes) - 1)
+    genes_to_mutate = random.sample(genes, k=num_genes_to_mutate)
 
     mutation_change = config["mutation_change"]
 
-    for i in range(0, gene_mutation_range):
-
+    for i in genes_to_mutate:
         mutate_gene(character, i, mutation_change)
 
     # Reajustamos los genes por si quedo fuera de los valores aceptados
