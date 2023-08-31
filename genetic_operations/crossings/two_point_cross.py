@@ -1,6 +1,5 @@
 from random import randint
 from classes.fighters import *
-from utils.fighter_creation import get_fighter_class
 from genetic_operations.crossings.cross_population import cross_population
 
 
@@ -25,9 +24,8 @@ def two_point_cross_parents(parent1: Fighter, parent2: Fighter):
     child1_array = scale_array_to_sum(child1_array)
     child2_array = scale_array_to_sum(child2_array)
 
-    cls = get_fighter_class(parent1)
-
-    return cls(*child1_array), cls(*child2_array)
+    create_child = parent1.__class__
+    return create_child(*child1_array), create_child(*child2_array)
 
 
 def two_point_cross(selected: list):
