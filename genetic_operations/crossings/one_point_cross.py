@@ -11,7 +11,7 @@ from genetic_operations.crossings.cross_population import cross_population
 # self.hp = hp
 
 
-def one_point_cross_parents(parent1: Fighter, parent2: Fighter, recievedPoint=0):
+def one_point_cross_parents(parent1: Fighter, parent2: Fighter):
     parent1arr = [parent1.strength, parent1.agility, parent1.expertise, parent1.resistence, parent1.hp, parent1.height]
     parent2arr = [parent2.strength, parent2.agility, parent2.expertise, parent2.resistence, parent2.hp, parent2.height]
 

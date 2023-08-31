@@ -1,7 +1,4 @@
-
-
-
-def cross_population(selected_fighters_list:list,crossing_strategy):
+def cross_population(selected_fighters_list: list, crossing_strategy):
     childList = []
     list_length = len(selected_fighters_list)
     for i in range(0, list_length, 2):
