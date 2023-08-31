@@ -1,12 +1,14 @@
 {
   "class": "Warrior",
 
-  "generation_size": 1,
+  "generation_size": 10,
 
   "selection_method1": "",
   "selection_method2": "",
 
-  "crossover_method": "",
+  "crossover_method": {
+
+  },
 
   "mutation_method": "single_gene",
   "mutation_prob": 1,

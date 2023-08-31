@@ -2,7 +2,6 @@
 from abc import ABC, abstractmethod
 from math import pow, tanh
 
-
 POINTS = 150
 
 
@@ -10,17 +9,42 @@ def check_valid_height(height):
     return 1.3 <= height <= 2.0
 
 
+LAST_INDEX = 4
+
+
+
+# def scale_array_to_sum(arr):
+#     initial_sum = sum(arr)
+#     scaling_factor = POINTS / initial_sum
+#
+#     scaled_array = [num * scaling_factor for num in arr]
+#
+#     # Ajustamos por los errores de redondeo
+#     sum_difference = POINTS - sum(scaled_array)
+#     scaled_array[-1] += sum_difference
+#
+#     return scaled_array
+
+
 def scale_array_to_sum(arr):
-    initial_sum = sum(arr)
+    initial_sum = 0
+    for idx in range(0, LAST_INDEX + 1):
+        initial_sum += arr[idx]
     scaling_factor = POINTS / initial_sum
 
-    scaled_array = [num * scaling_factor for num in arr]
+    for idx in range(0, LAST_INDEX + 1):
+        arr[idx] = arr[idx] * scaling_factor
 
     # Ajustamos por los errores de redondeo
-    sum_difference = POINTS - sum(scaled_array)
-    scaled_array[-1] += sum_difference
+    aux_sum = 0
+    for idx in range(0, LAST_INDEX + 1):
+        aux_sum += arr[idx]
 
-    return scaled_array
+    sum_difference = POINTS - aux_sum
+    arr[LAST_INDEX] += sum_difference
+
+    return arr
+
 
 class Fighter(ABC):
     @abstractmethod
@@ -40,15 +64,14 @@ class Fighter(ABC):
 
         self.performance = self.get_performance()
 
-
     def get_performance(self):
         return self.attack_lambda * self.get_attack() + self.defense_lambda * self.get_defense()
 
     def get_atm_mod(self):
-        return 0.5 - pow((3 * self.height - 5), 4) + pow((3 * self.height - 5), 2) + self.height/2
+        return 0.5 - pow((3 * self.height - 5), 4) + pow((3 * self.height - 5), 2) + self.height / 2
 
     def get_dem_mod(self):
-        return 2 + pow((3 * self.height - 5), 4) - pow((3 * self.height - 5), 2) - self.height/2
+        return 2 + pow((3 * self.height - 5), 4) - pow((3 * self.height - 5), 2) - self.height / 2
 
     def get_attack(self):
         return (self.get_agility() + self.get_expertise()) * self.get_strength() * self.get_atm_mod()
@@ -121,7 +144,8 @@ class Fighter(ABC):
             self.set_gene_by_idx(idx, value)
 
     def get_stats_array(self):
-        return ([self.strength,self.agility,self.expertise,self.resistence,self.hp], self.height) # obtener datos como listaAtributos, altura = instancia.get_stats_array()
+        return ([self.strength, self.agility, self.expertise, self.resistence, self.hp],
+                self.height)  # obtener datos como listaAtributos, altura = instancia.get_stats_array()
 
     def check_valid(self):
         return self.strength + self.agility + self.expertise + self.resistence + self.hp == POINTS
