@@ -5,6 +5,7 @@ from classes.generation import *
 from selection_algorithms.elite import *
 from genetic_operations.crossings.uniform_cross import uniform_cross
 from genetic_operations.crossings.one_point_cross import one_point_cross
+from genetic_operations.crossings.anular_cross import anular_cross
 # # la idea aca es levantar la configuracion de un JSON y cambiar la funcion create_fighter por el constructor adecuado
 # create_fighter = lambda stats, height: Warrior(stats, height)
 
@@ -59,7 +60,7 @@ def main():
     selected = elite_selection(10,zero)
 
     # Hacemos el cruce
-    children = one_point_cross(selected)
+    children = anular_cross(selected)
 
     for child in children:
         print(child)

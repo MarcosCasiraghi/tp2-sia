@@ -1,7 +1,7 @@
 {
   "class": "Warrior",
 
-  "generation_size": 10,
+  "generation_size": 3,
 
   "selection_method1": "",
   "selection_method2": "",

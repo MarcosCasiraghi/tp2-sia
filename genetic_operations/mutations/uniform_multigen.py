@@ -16,3 +16,6 @@ def mutate_uniform_multi_gen(character: Fighter, config):
             continue
 
         mutate_gene(character, i, mutation_change)
+
+    # Reajustamos los genes por si quedo fuera de los valores aceptados
+    character.readjust_genes()
