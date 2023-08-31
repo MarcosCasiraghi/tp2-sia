@@ -10,8 +10,6 @@ def mutate_single_gene(character: Fighter, config):
     if random.random() >= pm:
         return
 
-    delta = gene_delta()
-
     # Mutamos un gen random
     gene_to_mutate = random.randint(0, len(Genes) - 1)
 
