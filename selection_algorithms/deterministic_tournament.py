@@ -1,10 +1,8 @@
 from random import randint
 from classes.generation import Generation
 
-M = 3  # todo esto se tiene que ajustar en el json?
 
-
-def deterministic_tournament_selection(amount_to_select, generation: Generation):
+def deterministic_tournament_selection(amount_to_select, generation: Generation, M=3):
     new_generation = Generation()
     generation_len = len(generation)
     while len(new_generation) < amount_to_select:

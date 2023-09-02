@@ -1,10 +1,10 @@
 {
   "class": "Warrior",
 
-  "generation_size": 100000,
+  "generation_size": 1000000,
 
   "selection_method1": {
-    "method": "elite_selection"
+    "method": "ranking_selection"
   },
   "selection_method2": {
     "method": ""
@@ -13,11 +13,11 @@
   "crossover_method": "one_point_cross",
 
   "mutation_method": "mutate_complete",
-  "mutation_prob": 0.5,
-  "mutation_change": 0.5,
+  "mutation_prob": 0.05,
+  "mutation_change": 0.05,
 
   "replacement_method1": {
-    "method": "elite_selection"
+    "method": "ranking_selection"
   },
   "replacement_method2": {
     "method": ""
@@ -25,6 +25,6 @@
 
   "cutoff_criteria": {
     "method": "generation_cutoff",
-    "generation_amount": 1000
+    "generation_amount": 100
   }
 }

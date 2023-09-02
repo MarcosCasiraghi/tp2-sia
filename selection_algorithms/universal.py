@@ -1,5 +1,5 @@
 from classes.generation import Generation
-from roulette import relative_fitness, accumulative_fitness
+from selection_algorithms.roulette import relative_fitness, accumulative_fitness
 from random import random
 
 
