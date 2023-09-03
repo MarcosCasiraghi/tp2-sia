@@ -16,8 +16,11 @@ def main():
     # Generate gen 0
     gen = gen_zero(config)
 
+    # Informacion sobre las generaciones anteriores (por si lo necesita el criterio de corte)
+    prev_gen_info = {}
+
     # Ciclo con criterio de corte
-    while cutoff(gen, config):
+    while not cutoff(gen, config, prev_gen_info):
 
         # Hacemos la seleccion
         selected = select_populus(gen, config, True)

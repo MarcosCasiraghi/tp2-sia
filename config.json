@@ -1,7 +1,7 @@
 {
   "class": "Warrior",
 
-  "generation_size": 1000000,
+  "generation_size": 1000,
 
   "selection_method1": {
     "method": "ranking_selection"
@@ -9,6 +9,9 @@
   "selection_method2": {
     "method": ""
   },
+
+  "selection_rate_method1": 0.5,
+  "selection_size": 1000,
 
   "crossover_method": "one_point_cross",
 
@@ -19,12 +22,16 @@
   "replacement_method1": {
     "method": "ranking_selection"
   },
+
+  "replacement_rate_method1": 0.5,
+
   "replacement_method2": {
     "method": ""
   },
 
   "cutoff_criteria": {
-    "method": "generation_cutoff",
-    "generation_amount": 100
+    "method": "content_cutoff",
+    "delta": 0.05,
+    "max_gen_unchanged": 5
   }
 }
