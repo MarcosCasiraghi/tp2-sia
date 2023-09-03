@@ -70,9 +70,9 @@ class Fighter(ABC):
             raise ValueError("Invalid height provided")
         self.height = height
 
-        self.performance = self.get_performance()
+        self.performance = self.calc_performance()
 
-    def get_performance(self):
+    def calc_performance(self):
         return self.attack_lambda * self.get_attack() + self.defense_lambda * self.get_defense()
 
     def get_atm_mod(self):
@@ -159,10 +159,10 @@ class Fighter(ABC):
         return self.strength + self.agility + self.expertise + self.resistence + self.hp == POINTS
 
     def __str__(self):
-        return f"strength: {self.strength}, agility: {self.agility}, expertise: {self.expertise}, resistance: {self.resistence}, hp: {self.hp}, height: {self.height}, performance: {self.get_performance()}"
+        return f"strength: {self.strength}, agility: {self.agility}, expertise: {self.expertise}, resistance: {self.resistence}, hp: {self.hp}, height: {self.height}, performance: {self.performance}"
 
     def __lt__(self, other):
-        return self.get_performance() < other.get_performance()
+        return self.performance < other.performance
 
 
 class Warrior(Fighter):
