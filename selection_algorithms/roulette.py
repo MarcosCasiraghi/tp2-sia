@@ -20,14 +20,14 @@ def roulette_random_selection(amount_to_select, fitness, generation: Generation)
     normalized_fitness = relative_fitness(fitness, total_fitness)
 
     # calculo fitness accumulativo a partir del normalizado
-    accumulative_fitness = accumulative_fitness(normalized_fitness)
+    accum_fitness = accumulative_fitness(normalized_fitness)
 
     # Calculo numero aleatorio y selecciono los fighters
     selected = []
     for _ in range(amount_to_select):
         random_value = random.uniform(0, 1)
-        for i in range(len(accumulative_fitness)):
-            if accumulative_fitness[i] > random_value:
+        for i in range(len(accum_fitness)):
+            if accum_fitness[i] > random_value:
                 selected.append(generation[i])
                 break
 
