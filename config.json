@@ -7,11 +7,12 @@
     "method": "ranking_selection"
   },
   "selection_method2": {
-    "method": ""
+    "method": "roulette_selection"
   },
 
   "selection_rate_method1": 0.5,
-  "selection_size": 1000,
+
+  "selection_size": 103,
 
   "crossover_method": "one_point_cross",
 
@@ -22,12 +23,12 @@
   "replacement_method1": {
     "method": "ranking_selection"
   },
+  "replacement_method2": {
+    "method": "roulette_selection"
+  },
 
   "replacement_rate_method1": 0.5,
 
-  "replacement_method2": {
-    "method": ""
-  },
 
   "cutoff_criteria": {
     "method": "content_cutoff",
