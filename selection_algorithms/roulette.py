@@ -7,7 +7,7 @@ def roulette_selection(amount_to_select, generation: Generation):
     fitness_array = []
     # calculo el fitness total y agrego fitness en arreglo para despues normalizarlo
     for elem in generation:
-        fitness = elem.get_performance()
+        fitness = elem.performance
         fitness_array.append(fitness)
 
     return roulette_random_selection(amount_to_select, fitness_array, generation)

@@ -49,7 +49,7 @@ def individual_fitness(gen: Generation):
     individual_fitness = []
     total_fitness = 0
     for elem in gen:
-        fitness = elem.get_perfomance()
+        fitness = elem.performance
         individual_fitness.append(fitness)
         total_fitness += fitness
 
