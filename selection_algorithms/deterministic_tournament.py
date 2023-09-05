@@ -3,7 +3,7 @@ from classes.generation import Generation
 
 
 def deterministic_tournament_selection(amount_to_select, generation: Generation, M=3):
-    new_generation = Generation()
+    new_generation = []
     generation_len = len(generation)
     while len(new_generation) < amount_to_select:
         tournament_array = []

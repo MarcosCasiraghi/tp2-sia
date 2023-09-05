@@ -1,5 +1,6 @@
 import math
 
+from classes.generation import *
 from selection_algorithms.boltzmann import boltzmann_selection
 from selection_algorithms.deterministic_tournament import deterministic_tournament_selection
 from selection_algorithms.elite import elite_selection
@@ -32,22 +33,34 @@ def call_method(populus, method_name, selection_size, config):
         quit("Invalid selection method")
 
 
-def select_populus(populus, config, selection=True):
+def select_populus(populus, config):
     selection_size = config["selection_size"]
 
-    if selection:
-        size1 = round(selection_size * config["selection_rate_method1"])
-        size2 = selection_size - size1
+    size1 = round(selection_size * config["selection_rate_method1"])
+    size2 = selection_size - size1
 
-        s1 = call_method(populus, "selection_method1", size1, config)
-        s2 = call_method(populus, "selection_method2", size2, config)
-    else:
-        size1 = round(selection_size * config["replacement_rate_method1"])
-        size2 = selection_size - size1
-
-        s1 = call_method(populus, "replacement_method1", size1, config)
-        s2 = call_method(populus, "replacement_method2", size2, config)
+    s1 = call_method(populus, "selection_method1", size1, config)
+    s2 = call_method(populus, "selection_method2", size2, config)
 
     # TODO: eficiencia por favor
     s1.extend(s2)
     return s1
+
+
+def replace_populus(children, parent_generation, config, selection=True):
+    gen_size = config["generation_size"]
+
+    size1 = round(selection_size * config["replacement_rate_method1"])
+    size2 = gen_size - size1
+
+    if config["favour_children"] == True:
+        
+
+    s1 = call_method(populus, "replacement_method1", size1, config)
+    s2 = call_method(populus, "replacement_method2", size2, config)
+
+    # TODO: eficiencia por favor
+    gen = Generation()
+    gen.extend(s1)
+    gen.extend(s2)
+    return gen

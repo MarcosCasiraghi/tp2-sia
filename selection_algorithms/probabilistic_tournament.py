@@ -3,7 +3,7 @@ from classes.generation import Generation
 
 
 def probabilistic_tournament_selection(amount_to_select, generation: Generation, threshold=0.75):
-    new_generation = Generation()
+    new_generation = []
     generation_len = len(generation)
 
     while len(new_generation) < amount_to_select:

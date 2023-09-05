@@ -23,7 +23,7 @@ def main():
     while not cutoff(gen, config, prev_gen_info):
 
         # Hacemos la seleccion
-        selected = select_populus(gen, config, True)
+        selected = select_populus(gen, config)
 
         # Hacemos el cruce
         children = cross_populus(selected, config)
@@ -32,7 +32,7 @@ def main():
         mutate_populus(children, config)
 
         # Hacemos el reemplazo (usando los algoritmos de seleccion)
-        gen = select_populus(children, config, False)
+        gen = replace_populus(children, config)
 
     gen.sort(reverse=True)
     print(f"The best character is:\n {gen[0]}")
