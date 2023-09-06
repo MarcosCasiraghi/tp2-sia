@@ -33,6 +33,6 @@
 
   "cutoff_criteria": {
     "method": "acceptable_solution_cutoff",
-    "acceptable_fitness": 40
+    "acceptable_fitness": 41
   }
 }
