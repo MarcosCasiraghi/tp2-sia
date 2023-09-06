@@ -3,7 +3,7 @@ from selection_algorithms.roulette import relative_fitness, accumulative_fitness
 from random import random
 
 
-def universal_selection(amount_to_select, gen: Generation):
+def universal_selection(amount_to_select, populus):
     #fitness acumulado
     accumulated_ft = []
     #fitness relativo a cada pj
@@ -25,7 +25,7 @@ def universal_selection(amount_to_select, gen: Generation):
         k += 1
     #fitness para cada pj
 
-    individual_ft, total_ft = individual_fitness(gen)
+    individual_ft, total_ft = individual_fitness(populus)
 
     #fitness relativo para cada pj
 
@@ -39,16 +39,16 @@ def universal_selection(amount_to_select, gen: Generation):
     for _ in range(amount_to_select):
         for i in range(len(accumulated_ft)):
             if accumulated_ft[i] > r_j[r_index]:
-                selected_pjs.append(gen[i])
+                selected_pjs.append(populus[i])
                 r_index += 1
                 break
 
     return selected_pjs
 
-def individual_fitness(gen: Generation):
+def individual_fitness(populus):
     individual_fitness = []
     total_fitness = 0
-    for elem in gen:
+    for elem in populus:
         fitness = elem.performance
         individual_fitness.append(fitness)
         total_fitness += fitness

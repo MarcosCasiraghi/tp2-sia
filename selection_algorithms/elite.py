@@ -2,12 +2,12 @@
 from classes.generation import Generation
 
 
-def elite_selection(amount_to_select, generation: Generation):
-    generation.sort(reverse=True)
+def elite_selection(amount_to_select, populus):
+    populus.sort(reverse=True)
     selection = []
-    gen_size = len(generation)
+    gen_size = len(populus)
 
     for i in range(amount_to_select):
-        selection.append(generation[i % gen_size])
+        selection.append(populus[i % gen_size])
 
     return selection

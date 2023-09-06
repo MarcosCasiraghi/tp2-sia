@@ -3,17 +3,17 @@ import random
 import numpy as np
 
 
-def roulette_selection(amount_to_select, generation: Generation):
+def roulette_selection(amount_to_select, populus):
     fitness_array = []
     # calculo el fitness total y agrego fitness en arreglo para despues normalizarlo
-    for elem in generation:
+    for elem in populus:
         fitness = elem.performance
         fitness_array.append(fitness)
 
-    return roulette_random_selection(amount_to_select, fitness_array, generation)
+    return roulette_random_selection(amount_to_select, fitness_array, populus)
 
 
-def roulette_random_selection(amount_to_select, fitness, generation: Generation):
+def roulette_random_selection(amount_to_select, fitness, populus):
     total_fitness = np.sum(fitness)
 
     # normalizo cada fitness a partir de valor total
@@ -28,7 +28,7 @@ def roulette_random_selection(amount_to_select, fitness, generation: Generation)
         random_value = random.uniform(0, 1)
         for i in range(len(accum_fitness)):
             if accum_fitness[i] > random_value:
-                selected.append(generation[i])
+                selected.append(populus[i])
                 break
 
     return selected
