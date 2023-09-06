@@ -3,14 +3,6 @@ import random
 from classes.fighters import *
 from classes.generation import *
 
-class_map = {
-    "Warrior": Warrior,
-    "Fighter": Fighter,
-    "Archer":  Archer,
-    "Defensor": Defensor,
-    "Infilitrate": Infilitrate
-}
-
 NUM_ATTRIBUTES = 5
 MAX_POINTS = 150
 
@@ -31,7 +23,6 @@ def gen_random_character(config):
 
 
 def gen_zero(config):
-
     size = config["generation_size"]
     generation = Generation()
 

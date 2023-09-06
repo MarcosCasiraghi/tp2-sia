@@ -4,34 +4,11 @@ from enum import Enum
 from math import pow, tanh
 
 POINTS = 150
-
-class Genes(Enum):
-    STRENGTH = 0
-    AGILITY = 1
-    EXPERTISE = 2
-    RESISTANCE = 3
-    HP = 4
-    HEIGHT = 5
-
-def check_valid_height(height):
-    return 1.3 <= height <= 2.0
-
-
 LAST_INDEX = 4
 
 
-
-# def scale_array_to_sum(arr):
-#     initial_sum = sum(arr)
-#     scaling_factor = POINTS / initial_sum
-#
-#     scaled_array = [num * scaling_factor for num in arr]
-#
-#     # Ajustamos por los errores de redondeo
-#     sum_difference = POINTS - sum(scaled_array)
-#     scaled_array[-1] += sum_difference
-#
-#     return scaled_array
+def check_valid_height(height):
+    return 1.3 <= height <= 2.0
 
 
 def scale_array_to_sum(arr):
@@ -183,3 +160,20 @@ class Defensor(Fighter):
 class Infilitrate(Fighter):
     def __init__(self, strength, agility, expertise, resistence, hp, height):
         super().__init__(0.8, 0.3, strength, agility, expertise, resistence, hp, height)
+
+
+class Genes(Enum):
+    STRENGTH = 0
+    AGILITY = 1
+    EXPERTISE = 2
+    RESISTANCE = 3
+    HP = 4
+    HEIGHT = 5
+
+
+class_map = {
+    "Warrior": Warrior,
+    "Archer": Archer,
+    "Defensor": Defensor,
+    "Infilitrate": Infilitrate
+}
