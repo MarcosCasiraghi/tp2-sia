@@ -59,12 +59,18 @@ def collect_average_in_gen(gen):
 # = = = = = = = = = =  Main functions = = = = = = = = = =
 
 
-def collect_config(config, metrics):
+def initialize_metrics(config, metrics):
     metrics["config_used"] = config
+    metrics["best_performance_list"] = []
 
 
 def collect_time_metrics(start, end, metrics):
     metrics["execution_time"] = end - start
+
+
+def collect_metrics_running(current_gen, metrics):
+    best = max(current_gen)
+    metrics["best_performance_list"].append(best.performance)
 
 
 def collect_metrics_finished(final_gen, metrics):

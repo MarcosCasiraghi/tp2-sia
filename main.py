@@ -1,4 +1,5 @@
 import json
+import random
 import time
 
 from cutoff_criteria.base_cutoff import cutoff
@@ -16,11 +17,14 @@ from utils.metrics import *
 def main():
     config = json.load(open("./config.json"))
 
+    if config["seed"] != -1:
+        random.seed(config["seed"])
+
     # Aca pondremos las distintas metricas medidas a lo largo del algoritmo
     metrics = {}
 
     # Guardamos la configuracion usada
-    collect_config(config, metrics)
+    initialize_metrics(config, metrics)
 
     # Informacion sobre las generaciones anteriores (por si lo necesita el criterio de corte)
     prev_gen_info = {}
@@ -44,6 +48,8 @@ def main():
 
         # Hacemos el reemplazo (usando los algoritmos de seleccion)
         gen = replace_populus(children, gen, config)
+
+        collect_metrics_running(gen, metrics)
 
     # = - = - = Termina el algoritmo = - = - =
     end_time = time.time()

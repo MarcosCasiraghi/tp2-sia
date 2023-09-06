@@ -1,36 +1,27 @@
 {
+  "seed": -1,
   "class": "Warrior",
-
   "generation_size": 10000,
-
   "selection_method1": {
     "method": "ranking_selection"
   },
   "selection_method2": {
     "method": "elite_selection"
   },
-
   "selection_rate_method1": 0.5,
-
   "selection_size": 1000,
-
   "crossover_method": "two_point_cross",
-
-  "mutation_method": "mutate_complete",
+  "mutation_method": "mutate_uniform_multi_gen",
   "mutation_prob": 0.05,
   "mutation_change": 0.05,
-
   "replacement_method1": {
     "method": "ranking_selection"
   },
   "replacement_method2": {
     "method": "elite_selection"
   },
-
   "replacement_rate_method1": 0.5,
-
   "favour_children": true,
-
   "cutoff_criteria": {
     "method": "acceptable_solution_cutoff",
     "acceptable_fitness": 41
