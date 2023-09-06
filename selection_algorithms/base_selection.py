@@ -11,7 +11,6 @@ from selection_algorithms.universal import universal_selection
 
 
 def call_method(populus, method_name, selection_size, config):
-
     method = config[method_name]["method"]
 
     if method == "boltzmann_selection":
@@ -47,20 +46,60 @@ def select_populus(populus, config):
     return s1
 
 
-def replace_populus(children, parent_generation, config, selection=True):
+def replace_populus(children, parent_generation, config):
+    gen = Generation()  # Nueva generacion
     gen_size = config["generation_size"]
 
-    size1 = round(selection_size * config["replacement_rate_method1"])
-    size2 = gen_size - size1
-
     if config["favour_children"] == True:
-        
+        if len(children) < gen_size:
 
-    s1 = call_method(populus, "replacement_method1", size1, config)
-    s2 = call_method(populus, "replacement_method2", size2, config)
+            # Cuantos espacios quedan en la nueva generacion
+            remaining_size = gen_size
 
-    # TODO: eficiencia por favor
-    gen = Generation()
-    gen.extend(s1)
-    gen.extend(s2)
+            # Entran todos los hijos por default
+            gen.extend(children)
+
+            # Lo que queda para completar, lo hacemos con los 2 metodos
+            remaining_size -= len(children)
+            size1 = round(remaining_size * config["replacement_rate_method1"])
+            size2 = remaining_size - size1
+
+            # Elegimos de los padres
+            s1 = call_method(parent_generation, "replacement_method1", size1, config)
+            s2 = call_method(parent_generation, "replacement_method2", size2, config)
+
+            gen.extend(s1)
+            gen.extend(s2)
+
+        elif len(children) > gen_size:
+            size1 = round(gen_size * config["replacement_rate_method1"])
+            size2 = gen_size - size1
+
+            # Elegimos solo de los hijos, al tener suficiente para completar la generacion
+            s1 = call_method(children, "replacement_method1", size1, config)
+            s2 = call_method(children, "replacement_method2", size2, config)
+
+            gen.extend(s1)
+            gen.extend(s2)
+
+        else:  # Caso: cant. de children = gen_size
+
+            # Tomamos solo los hijos
+            gen.extend(children)
+
+
+    else:  # Caso: tradicional
+
+        # Ahora tomamos los hijos y padres por igual
+        parent_generation.extend(children)
+
+        size1 = round(gen_size * config["replacement_rate_method1"])
+        size2 = gen_size - size1
+
+        s1 = call_method(parent_generation, "replacement_method1", size1, config)
+        s2 = call_method(parent_generation, "replacement_method2", size2, config)
+
+        gen.extend(s1)
+        gen.extend(s2)
+
     return gen

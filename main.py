@@ -2,7 +2,7 @@ import json
 from cutoff_criteria.base_cutoff import cutoff
 from genetic_operations.crossings.base_crossing import cross_populus
 from genetic_operations.mutations.base_mutation import mutate_populus
-from selection_algorithms.base_selection import select_populus
+from selection_algorithms.base_selection import select_populus, replace_populus
 from utils.gen_zero import gen_zero
 
 
@@ -32,7 +32,7 @@ def main():
         mutate_populus(children, config)
 
         # Hacemos el reemplazo (usando los algoritmos de seleccion)
-        gen = replace_populus(children, config)
+        gen = replace_populus(children, gen, config)
 
     gen.sort(reverse=True)
     print(f"The best character is:\n {gen[0]}")
