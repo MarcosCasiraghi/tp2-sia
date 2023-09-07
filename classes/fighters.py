@@ -143,6 +143,7 @@ class Fighter(ABC):
         return self.performance < other.performance
 
 
+
 class Warrior(Fighter):
     def __init__(self, strength, agility, expertise, resistence, hp, height):
         super().__init__(0.6, 0.4, strength, agility, expertise, resistence, hp, height)
