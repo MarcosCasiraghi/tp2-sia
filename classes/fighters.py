@@ -1,4 +1,6 @@
 # abstract base class work
+import copy
+import random
 from abc import ABC, abstractmethod
 from enum import Enum
 from math import pow, tanh
@@ -13,6 +15,7 @@ def check_valid_height(height):
 
 def scale_array_to_sum(arr):
     initial_sum = 0
+    old_arr = copy.deepcopy(arr)
     for idx in range(0, LAST_INDEX + 1):
         initial_sum += arr[idx]
     scaling_factor = POINTS / initial_sum
@@ -26,7 +29,15 @@ def scale_array_to_sum(arr):
         aux_sum += arr[idx]
 
     sum_difference = POINTS - aux_sum
-    arr[LAST_INDEX] += sum_difference
+
+    adjusted = False
+    while not adjusted:
+        # Seleccionamos uno random para completar a que lleguen a 150
+        index_to_complete = random.randint(0, LAST_INDEX)
+
+        if arr[index_to_complete] + sum_difference > 0:
+            arr[index_to_complete] += sum_difference
+            adjusted = True
 
     return arr
 
@@ -141,7 +152,6 @@ class Fighter(ABC):
 
     def __lt__(self, other):
         return self.performance < other.performance
-
 
 
 class Warrior(Fighter):
