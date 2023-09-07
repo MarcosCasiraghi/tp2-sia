@@ -27,7 +27,7 @@ def main():
     initialize_metrics(config, metrics)
 
     # Informacion sobre las generaciones anteriores (por si lo necesita el criterio de corte)
-    prev_gen_info = {}
+    prev_gen_info = {"gen_number": 0}
 
     # = - = - = Comienza el algoritmo = - = - =
     start_time = time.time()
@@ -38,7 +38,7 @@ def main():
     # Ciclo con criterio de corte
     while not cutoff(gen, config, prev_gen_info):
         # Hacemos la seleccion
-        selected = select_populus(gen, config)
+        selected = select_populus(gen, config, prev_gen_info)
 
         # Hacemos el cruce
         children = cross_populus(selected, config)
@@ -47,9 +47,13 @@ def main():
         mutate_populus(children, config)
 
         # Hacemos el reemplazo (usando los algoritmos de seleccion)
-        gen = replace_populus(children, gen, config)
+        gen = replace_populus(children, gen, config, prev_gen_info)
+
+        # Pasamos a una nueva generacion
+        prev_gen_info["gen_number"] += 1
 
         collect_metrics_running(gen, metrics)
+
 
     # = - = - = Termina el algoritmo = - = - =
     end_time = time.time()

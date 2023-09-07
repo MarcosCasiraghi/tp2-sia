@@ -1,3 +1,5 @@
+import random
+
 from genetic_operations.crossings.two_point_cross import two_point_cross
 from genetic_operations.crossings.anular_cross import anular_cross
 from genetic_operations.crossings.one_point_cross import one_point_cross

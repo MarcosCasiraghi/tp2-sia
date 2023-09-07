@@ -4,9 +4,9 @@ import math
 import numpy as np
 
 
-def boltzmann_selection(amount_to_select, populus, T0, TC, k):
+def boltzmann_selection(amount_to_select, populus, T0, TC, k, prev_gen_info):
     boltzmann_func = []
-    temperature = TC + (T0 - TC) * math.exp(-k * populus.generation_number)
+    temperature = TC + (T0 - TC) * math.exp(-k * prev_gen_info["gen_number"])
     for elem in populus:
         boltzmann_func.append(math.exp(elem.performance/temperature))
 
