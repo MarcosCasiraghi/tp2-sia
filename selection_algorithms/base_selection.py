@@ -10,6 +10,8 @@ from selection_algorithms.roulette import roulette_selection
 from selection_algorithms.universal import universal_selection
 
 
+# = - = - = - = - = - = Metodos auxiliares = - = - = - = - = - =
+
 def remove_from_populus(populus, selected):
 
     # TODO: guarda con la eficiencia
@@ -19,6 +21,7 @@ def remove_from_populus(populus, selected):
             populus.remove(item)
 
 
+# Llama el metodo apropiado, pasandole los parametros
 def call_method(populus, method_name, selection_size, config):
     if selection_size <= 0:
         return []
@@ -44,22 +47,24 @@ def call_method(populus, method_name, selection_size, config):
         quit("Invalid selection method")
 
 
-def select_populus(populus, config):
-    selection_size = config["selection_size"]
-
-    size1 = round(selection_size * config["selection_rate_method1"])
+# Calculo el tamano del para cada metodo y llamamos el metodo
+def size_and_call(populus, selection_size, rate, method_name1, method_name2, config):
+    size1 = round(selection_size * rate)
     size2 = selection_size - size1
 
-    s1 = call_method(populus, "selection_method1", size1, config)
+    # Elegimos de los padres
+    s1 = call_method(populus, method_name1, size1, config)
+    s2 = call_method(populus, method_name2, size2, config)
 
-    # Optimizacion: solo eliminamos si realmente se va a seleccionar en el segundo metodo
-    if size2 > 0:
-        remove_from_populus(populus, s1)
+    return s1, s2
 
-    s2 = call_method(populus, "selection_method2", size2, config)
 
-    # Re agregamos los sacados
-    populus.extend(s1)
+# = - = - = - = - = - = Metodos de seleccion y reemplazo = - = - = - = - = - =
+
+def select_populus(populus, config):
+
+    s1, s2 = size_and_call(populus, config["selection_size"], config["selection_rate_method1"],
+                           "selection_method1", "selection_method2", config)
 
     s1.extend(s2)
     return s1
@@ -72,45 +77,22 @@ def replace_populus(children, parent_generation, config):
     if config["favour_children"] == True:
         if len(children) < gen_size:
 
-            # Cuantos espacios quedan en la nueva generacion
-            remaining_size = gen_size
-
             # Entran todos los hijos por default
             gen.extend(children)
 
             # Lo que queda para completar, lo hacemos con los 2 metodos
-            remaining_size -= len(children)
-            size1 = round(remaining_size * config["replacement_rate_method1"])
-            size2 = remaining_size - size1
+            remaining_size = gen_size - len(children)
 
-            # Elegimos de los padres
-            s1 = call_method(parent_generation, "replacement_method1", size1, config)
-
-            # Optimizacion: solo eliminamos si realmente se va a seleccionar en el segundo metodo
-            if size2 > 0:
-                remove_from_populus(parent_generation, s1)
-
-            s2 = call_method(parent_generation, "replacement_method2", size2, config)
-
-            # No hace falta reagregar los sacados de parent_generation
+            s1, s2 = size_and_call(parent_generation, remaining_size, config["replacement_rate_method1"],
+                                   "replacement_method1", "replacement_method2", config)
 
             gen.extend(s1)
             gen.extend(s2)
 
         elif len(children) > gen_size:
-            size1 = round(gen_size * config["replacement_rate_method1"])
-            size2 = gen_size - size1
 
-            # Elegimos solo de los hijos, al tener suficiente para completar la generacion
-            s1 = call_method(children, "replacement_method1", size1, config)
-
-            # Optimizacion: solo eliminamos si realmente se va a seleccionar en el segundo metodo
-            if size2 > 0:
-                remove_from_populus(children, s1)
-
-            s2 = call_method(children, "replacement_method2", size2, config)
-
-            # No hace falta reagregar los sacados de children
+            s1, s2 = size_and_call(children, gen_size, config["replacement_rate_method1"],
+                                   "replacement_method1", "replacement_method2", config)
 
             gen.extend(s1)
             gen.extend(s2)
@@ -120,24 +102,13 @@ def replace_populus(children, parent_generation, config):
             # Tomamos solo los hijos
             gen.extend(children)
 
-
     else:  # Caso: tradicional
 
         # Ahora tomamos los hijos y padres por igual
         parent_generation.extend(children)
 
-        size1 = round(gen_size * config["replacement_rate_method1"])
-        size2 = gen_size - size1
-
-        s1 = call_method(parent_generation, "replacement_method1", size1, config)
-
-        # Optimizacion: solo eliminamos si realmente se va a seleccionar en el segundo metodo
-        if size2 > 0:
-            remove_from_populus(parent_generation, s1)
-
-        s2 = call_method(parent_generation, "replacement_method2", size2, config)
-
-        # No hace falta reagregar los sacados de parent_generation
+        s1, s2 = size_and_call(parent_generation, gen_size, config["replacement_rate_method1"],
+                               "replacement_method1", "replacement_method2", config)
 
         gen.extend(s1)
         gen.extend(s2)
