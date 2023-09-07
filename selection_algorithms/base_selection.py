@@ -14,7 +14,7 @@ def call_method(populus, method_name, selection_size, config):
     method = config[method_name]["method"]
 
     if method == "boltzmann_selection":
-        return boltzmann_selection(selection_size, populus, config[method_name]['selection_temperature'])
+        return boltzmann_selection(selection_size, populus, config[method_name]['temperature_0'], config[method_name]['temperature_C'], config[method_name]['k'])
     elif method == "deterministic_tournament_selection":
         return deterministic_tournament_selection(selection_size, populus, config[method_name]['m_value'])
     elif method == "probabilistic_tournament_selection":
