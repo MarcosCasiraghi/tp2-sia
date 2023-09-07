@@ -1,4 +1,4 @@
-import random
+from random import shuffle
 
 from genetic_operations.crossings.two_point_cross import two_point_cross
 from genetic_operations.crossings.anular_cross import anular_cross
@@ -20,5 +20,5 @@ def cross_populus(populus, config):
         quit("Invalid mutation method")
 
     # mezclamos los seleccionados (puede que hayan estado en orden)
-    random.shuffle(populus)
+    shuffle(populus)
     return method(populus)
