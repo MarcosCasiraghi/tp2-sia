@@ -40,6 +40,8 @@ def main():
         # Hacemos la seleccion
         selected = select_populus(gen, config)
 
+        # mezclamos los seleccionados (puede que hayan estado en orden)
+        random.shuffle(selected)
         # Hacemos el cruce
         children = cross_populus(selected, config)
 
