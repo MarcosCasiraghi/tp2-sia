@@ -1,21 +1,28 @@
 # abstract base class work
 import copy
 import random
+import sys
 from abc import ABC, abstractmethod
 from enum import Enum
 from math import pow, tanh
 
 POINTS = 150
 LAST_INDEX = 4
+DELTA = 0.0000000001
 
 
 def check_valid_height(height):
     return 1.3 <= height <= 2.0
 
 
+def check_valid_attribute(strength, agility, expertise, resistence, hp):
+    return (0 < strength < 150 and 0 < agility < 150 and 0 < expertise < 150 and 0 < resistence < 150 and 0 < hp < 150
+            and - DELTA <= strength + agility + expertise + resistence + hp - 150 <= DELTA)
+
+
 def scale_array_to_sum(arr):
     initial_sum = 0
-    old_arr = copy.deepcopy(arr)
+
     for idx in range(0, LAST_INDEX + 1):
         initial_sum += arr[idx]
     scaling_factor = POINTS / initial_sum
@@ -45,6 +52,15 @@ def scale_array_to_sum(arr):
 class Fighter(ABC):
     @abstractmethod
     def __init__(self, attack_lambda, defence_lambda, strength, agility, expertise, resistence, hp, height):
+        if attack_lambda + defence_lambda != 1:
+            raise ValueError("Invalid lambda values")
+        total = strength + agility + expertise + resistence + hp
+        if not check_valid_attribute(strength, agility, expertise, resistence, hp):
+            raise ValueError("Invalid attributes for character")
+
+        if not check_valid_height(height):
+            raise ValueError("Invalid height provided")
+
         self.attack_lambda = attack_lambda
         self.defense_lambda = defence_lambda
 
@@ -53,9 +69,6 @@ class Fighter(ABC):
         self.expertise = expertise
         self.resistence = resistence
         self.hp = hp
-
-        if not check_valid_height(height):
-            raise ValueError("Invalid height provided")
 
         self.height = height
 
@@ -140,12 +153,7 @@ class Fighter(ABC):
         for idx, value in enumerate(scaled):
             self.set_gene_by_idx(idx, value)
 
-    def get_stats_array(self):
-        return ([self.strength, self.agility, self.expertise, self.resistence, self.hp],
-                self.height)  # obtener datos como listaAtributos, altura = instancia.get_stats_array()
-
-    def check_valid(self):
-        return self.strength + self.agility + self.expertise + self.resistence + self.hp == POINTS
+        self.performance = self.calc_performance()
 
     def __str__(self):
         return f"strength: {self.strength}, agility: {self.agility}, expertise: {self.expertise}, resistance: {self.resistence}, hp: {self.hp}, height: {self.height}, performance: {self.performance}"
