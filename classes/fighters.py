@@ -45,6 +45,7 @@ class Fighter(ABC):
 
         if not check_valid_height(height):
             raise ValueError("Invalid height provided")
+
         self.height = height
 
         self.performance = self.calc_performance()
@@ -77,7 +78,7 @@ class Fighter(ABC):
         return tanh(0.01 * self.resistence)
 
     def get_hp(self):
-        return tanh(0.01 * self.hp)
+        return 100 * tanh(0.01 * self.hp)
 
     def get_gene_by_idx(self, idx):
 
