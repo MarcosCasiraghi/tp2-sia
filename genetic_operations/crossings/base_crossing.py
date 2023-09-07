@@ -17,4 +17,6 @@ def cross_populus(populus, config):
     if method is None:
         quit("Invalid mutation method")
 
+    # mezclamos los seleccionados (puede que hayan estado en orden)
+    random.shuffle(populus)
     return method(populus)

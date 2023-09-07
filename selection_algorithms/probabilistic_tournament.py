@@ -1,21 +1,29 @@
+import random
 from random import randint
 from classes.generation import Generation
 
 
 def probabilistic_tournament_selection(amount_to_select, populus, threshold=0.75):
     selected = []
-    generation_len = len(populus)
 
     while len(selected) < amount_to_select:
-        tournament_array = []
-        random1 = randint(0, generation_len)
-        random2 = randint(0, generation_len)
-        tournament_array.append(populus[random1])
-        tournament_array.append(populus[random2])
-        tournament_array.sort(reverse=True)
+        character1 = random.choice(populus)
+        character2 = random.choice(populus)
 
         probability = randint(1, 101) / 100
+
+        # Caso: elijo el mejor de los dos
         if probability > threshold:
-            selected.append(tournament_array[0])
+            if character1.__lt__(character2):
+                selected.append(character2)
+            else:
+                selected.append(character1)
+
+        # Caso: elijo el peor de los dos
         else:
-            selected.append(tournament_array[1])
+            if character1.__lt__(character2):
+                selected.append(character1)
+            else:
+                selected.append(character2)
+
+    return selected

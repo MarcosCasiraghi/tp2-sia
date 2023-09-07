@@ -13,5 +13,5 @@ def cutoff(populus, config, prev_gen_info):
     elif method == "acceptable_solution_cutoff":
         return acceptable_solution_cutoff(populus, config["cutoff_criteria"]["acceptable_fitness"])
     else:
-        quit("Invalid mutation method")
+        quit("Invalid cutoff method")
 

@@ -46,6 +46,6 @@ def accumulative_fitness(relative_fitness):
         if i == 0:
             accumulative_ft.append(relative_fitness[i])
         else:
-            accumulative_ft.append(relative_fitness[i] + relative_fitness[i-1])
+            accumulative_ft.append(relative_fitness[i] + accumulative_ft[i-1])
     return accumulative_ft
 
