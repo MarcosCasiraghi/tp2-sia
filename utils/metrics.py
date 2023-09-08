@@ -1,4 +1,5 @@
 import json
+import os.path
 from datetime import datetime
 
 import numpy as np
@@ -110,5 +111,50 @@ def collect_metrics_finished(final_gen, metrics):
 
 def export_metrics(metrics):
     now = datetime.now().strftime("%d-%m-%Y_%H%M%S")
-    with open(f"./results/results_{now}.json", mode="w") as file:
+
+    # Exporto las metricas
+    with open(f"./results/results_{now}.json", mode="w+") as file:
         file.write(json.dumps(metrics, indent=4))
+
+    # Creo el archivo si no existe
+    if not os.path.exists("./results/best/best_configs.json"):
+        with open("./results/best/best_configs.json", "w") as new_file:
+            empty_map = {}
+            for c in ["Warrior", "Archer", "Infiltrate", "Defensor"]:
+                empty_map[c] = {
+                    "config_used": {},
+                    "performance": 0,
+                    "strength": 0,
+                    "agility": 0,
+                    "expertise": 0,
+                    "resistence": 0,
+                    "hp": 0,
+                    "height": 0
+                }
+
+            new_file.write(json.dumps(empty_map, indent=4))
+
+    # Malisimo que tengo que abrir y cerrar 3 veces >:[
+
+    # Leo los contenidos
+    with open("./results/best/best_configs.json", "r") as best_file:
+        best_characters = json.load(best_file)
+
+    # Guardo la configuracion si genero un mejor individuo que el maximo anterior
+    best_in_current = metrics["best_in_final_gen"]
+    class_used = metrics["config_used"]["class"]
+
+    if best_in_current["performance"] > best_characters[class_used]["performance"]:
+        best_characters[class_used]["config_used"] = metrics["config_used"]
+        best_characters[class_used]["performance"] = best_in_current["performance"]
+        best_characters[class_used]["strength"] = best_in_current["strength"]
+        best_characters[class_used]["agility"] = best_in_current["agility"]
+        best_characters[class_used]["expertise"] = best_in_current["expertise"]
+        best_characters[class_used]["resistence"] = best_in_current["resistence"]
+        best_characters[class_used]["hp"] = best_in_current["hp"]
+        best_characters[class_used]["height"] = best_in_current["height"]
+
+        with open("./results/best/best_configs.json", "w") as best_file:
+            best_file.write(json.dumps(best_characters, indent=4))
+
+

@@ -60,7 +60,10 @@ def main():
     collect_time_metrics(start_time, end_time, metrics)
     collect_metrics_finished(gen, metrics)
 
-    export_metrics(metrics)
+    try:
+        export_metrics(metrics)
+    except:
+        quit("Error exporting metrics")
 
 
 main()
