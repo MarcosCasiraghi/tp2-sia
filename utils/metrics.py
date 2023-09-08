@@ -1,6 +1,10 @@
 import json
 from datetime import datetime
 
+import numpy as np
+
+from classes.fighters import Genes
+
 
 # = = = = = = = = = =  Side functions  = = = = = = = = = =
 
@@ -56,12 +60,27 @@ def collect_average_in_gen(gen):
     return resp
 
 
+def calculate_gen_variation(populus, gene_idx):
+    values = [character.get_gene_by_idx(gene_idx) for character in populus]
+    return np.std(values)
+
+
 # = = = = = = = = = =  Main functions = = = = = = = = = =
 
 
 def initialize_metrics(config, metrics):
     metrics["config_used"] = config
+
+    # Para que aparezcan al principio
+    metrics["execution_time"] = None
+    metrics["number_of_generations"] = None
+    metrics["best_in_final_gen"] = None
+    metrics["worst_in_final_gen"] = None
+    metrics["average_in_final_gen"] = None
+
     metrics["best_performance_list"] = []
+    for gen in Genes:
+        metrics[f"{gen.name.lower()}_variation"] = []
 
 
 def collect_time_metrics(start, end, metrics):
@@ -69,8 +88,13 @@ def collect_time_metrics(start, end, metrics):
 
 
 def collect_metrics_running(current_gen, metrics):
+    # Calculo mejor
     best = max(current_gen)
     metrics["best_performance_list"].append(best.performance)
+
+    # Calculo variacion en genes
+    for idx, gen in enumerate(Genes):
+        metrics[f"{gen.name.lower()}_variation"].append(calculate_gen_variation(current_gen, idx))
 
 
 def collect_metrics_finished(final_gen, metrics):
