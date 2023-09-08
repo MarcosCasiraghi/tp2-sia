@@ -54,7 +54,6 @@ def main():
 
         collect_metrics_running(gen, metrics)
 
-
     # = - = - = Termina el algoritmo = - = - =
     end_time = time.time()
 
