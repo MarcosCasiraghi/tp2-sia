@@ -79,6 +79,8 @@ def initialize_metrics(config, metrics):
     metrics["average_in_final_gen"] = None
 
     metrics["best_performance_list"] = []
+    metrics["worst_performance_list"] = []
+    metrics["average_performance_list"] = []
     for gen in Genes:
         metrics[f"{gen.name.lower()}_variation"] = []
 
@@ -88,9 +90,10 @@ def collect_time_metrics(start, end, metrics):
 
 
 def collect_metrics_running(current_gen, metrics):
-    # Calculo mejor
-    best = max(current_gen)
-    metrics["best_performance_list"].append(best.performance)
+    # Calculo mejor, el peor y el promedio
+    metrics["best_performance_list"].append(collect_best_in_gen(current_gen)["performance"])
+    metrics["worst_performance_list"].append(collect_worst_in_gen(current_gen)["performance"])
+    metrics["average_performance_list"].append(collect_average_in_gen(current_gen)["performance"])
 
     # Calculo variacion en genes
     for idx, gen in enumerate(Genes):

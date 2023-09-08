@@ -27,13 +27,22 @@ def generate_gene_variation_graph(results):
 
 
 def generate_best_performance_graph(results):
-    best_performances = results["best_performance_list"]
 
-    generations = list(range(0, len(best_performances) + 1))
 
-    trace = go.Scatter(x=generations, y=best_performances, mode='markers', name='Best Performance')
-    layout = go.Layout(title='Best Performance per Generation',xaxis=dict(title='Generation'),yaxis=dict(title='Best Performance'), xaxis_range=[0, len(generations) - 1])
-    fig = go.Figure(data=[trace], layout=layout)
+    generations = list(range(0, len(results["best_performance_list"]) + 1))
+
+    trace = [
+        go.Scatter(x=generations, y=results["best_performance_list"], mode='markers', name='Best Performance'),
+        go.Scatter(x=generations, y=results["worst_performance_list"], mode='markers', name='Worst Performance'),
+        go.Scatter(x=generations, y=results["average_performance_list"], mode='markers', name='Average Performance')
+    ]
+    layout = go.Layout(
+        title='Best, Worst and Average Performance per Generation',
+        xaxis=dict(title='Generation'),
+        yaxis=dict(title='Performance'),
+        xaxis_range=[0, len(generations) - 1]
+    )
+    fig = go.Figure(data=trace, layout=layout)
     fig.show()
 
 
