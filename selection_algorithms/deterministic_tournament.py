@@ -8,7 +8,7 @@ def deterministic_tournament_selection(amount_to_select, populus, M=3):
     while len(selected) < amount_to_select:
         tournament_array = []
         for i in range(0, M):
-            random = randint(0, generation_len)
+            random = randint(0, generation_len-1)
             if populus[random] not in tournament_array:
                 tournament_array.append(populus)
             else:
