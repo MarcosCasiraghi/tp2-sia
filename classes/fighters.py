@@ -1,7 +1,5 @@
 # abstract base class work
-import copy
 import random
-import sys
 from abc import ABC, abstractmethod
 from enum import Enum
 from math import pow, tanh
@@ -11,11 +9,11 @@ LAST_INDEX = 4
 DELTA = 0.0000000001
 
 
-def check_valid_height(height):
+def valid_height(height):
     return 1.3 <= height <= 2.0
 
 
-def check_valid_attribute(strength, agility, expertise, resistence, hp):
+def valid_attribute(strength, agility, expertise, resistence, hp):
     return (0 < strength < 150 and 0 < agility < 150 and 0 < expertise < 150 and 0 < resistence < 150 and 0 < hp < 150
             and - DELTA <= strength + agility + expertise + resistence + hp - 150 <= DELTA)
 
@@ -54,11 +52,11 @@ class Fighter(ABC):
     def __init__(self, attack_lambda, defence_lambda, strength, agility, expertise, resistence, hp, height):
         if attack_lambda + defence_lambda != 1:
             raise ValueError("Invalid lambda values")
-        total = strength + agility + expertise + resistence + hp
-        if not check_valid_attribute(strength, agility, expertise, resistence, hp):
+
+        if not valid_attribute(strength, agility, expertise, resistence, hp):
             raise ValueError("Invalid attributes for character")
 
-        if not check_valid_height(height):
+        if not valid_height(height):
             raise ValueError("Invalid height provided")
 
         self.attack_lambda = attack_lambda
