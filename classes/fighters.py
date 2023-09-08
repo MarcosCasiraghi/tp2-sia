@@ -50,9 +50,6 @@ def scale_array_to_sum(arr):
 class Fighter(ABC):
     @abstractmethod
     def __init__(self, attack_lambda, defence_lambda, strength, agility, expertise, resistence, hp, height):
-        if attack_lambda + defence_lambda != 1:
-            raise ValueError("Invalid lambda values")
-
         if not valid_attribute(strength, agility, expertise, resistence, hp):
             raise ValueError("Invalid attributes for character")
 

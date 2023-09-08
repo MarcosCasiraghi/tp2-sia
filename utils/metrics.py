@@ -120,7 +120,7 @@ def export_metrics(metrics):
     if not os.path.exists("./results/best/best_configs.json"):
         with open("./results/best/best_configs.json", "w") as new_file:
             empty_map = {}
-            for c in ["Warrior", "Archer", "Infiltrate", "Defensor"]:
+            for c in ["Warrior", "Archer", "Infilitrate", "Defensor"]:
                 empty_map[c] = {
                     "config_used": {},
                     "performance": 0,
