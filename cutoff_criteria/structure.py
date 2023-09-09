@@ -8,24 +8,11 @@ from classes.fighters import Fighter
 # ej: No cambiar => Alelos iguales
 # ej: Altura no cambia
 
-
-
-
-#  self.strength = strength
-#  self.agility = agility
-#  self.expertise = expertise
-#  self.resistence = resistence
-#  self.hp = hp
-
-
 def obtain_attribute_sum(gen, attribute):
     sum = 0
     for elem in gen:
         sum += getattr(elem,attribute)
     return sum / len(gen)
-
-
-
 
 def structure_cutoff( gen: Generation ,prev_gen_info, delta, delta_height):
     attributes = ["height", "agility", "strength", "expertise", "resistance", "hp"]

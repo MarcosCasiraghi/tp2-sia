@@ -3,8 +3,8 @@ from random import randint
 
 
 def get_crossing_data(parent1: Fighter, parent2: Fighter):
-    parent1arr = [parent1.strength, parent1.agility, parent1.expertise, parent1.resistence, parent1.hp, parent1.height]
-    parent2arr = [parent2.strength, parent2.agility, parent2.expertise, parent2.resistence, parent2.hp, parent2.height]
+    parent1arr = [parent1.strength, parent1.agility, parent1.expertise, parent1.resistance, parent1.hp, parent1.height]
+    parent2arr = [parent2.strength, parent2.agility, parent2.expertise, parent2.resistance, parent2.hp, parent2.height]
 
     array_length = len(parent1arr)
     change_point = randint(0, array_length - 1)

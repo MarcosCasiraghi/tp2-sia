@@ -3,16 +3,9 @@ from classes.fighters import *
 from genetic_operations.crossings.cross_population import cross_population
 
 
-# self.strength = strength
-# self.agility = agility
-# self.expertise = expertise
-# self.resistence = resistence
-# self.hp = hp
-
-
 def two_point_cross_parents(parent1: Fighter, parent2: Fighter):
-    child1_array = [parent1.strength, parent1.agility, parent1.expertise, parent1.resistence, parent1.hp, parent1.height]
-    child2_array = [parent2.strength, parent2.agility, parent2.expertise, parent2.resistence, parent2.hp, parent2.height]
+    child1_array = [parent1.strength, parent1.agility, parent1.expertise, parent1.resistance, parent1.hp, parent1.height]
+    child2_array = [parent2.strength, parent2.agility, parent2.expertise, parent2.resistance, parent2.hp, parent2.height]
 
     array_length = len(child1_array)
     point1 = randint(0, array_length - 1)

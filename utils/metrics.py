@@ -14,7 +14,7 @@ def collect_best_in_gen(gen):
 
     best_in_gen = {
         "performance": best.performance, "strength": best.strength, "agility": best.agility,
-        "expertise": best.expertise, "resistance": best.resistence, "hp": best.hp, "height": best.height
+        "expertise": best.expertise, "resistance": best.resistance, "hp": best.hp, "height": best.height
     }
 
     return best_in_gen
@@ -25,7 +25,7 @@ def collect_worst_in_gen(gen):
 
     worst_in_gen = {
         "performance": best.performance, "strength": best.strength, "agility": best.agility,
-        "expertise": best.expertise, "resistance": best.resistence, "hp": best.hp, "height": best.height
+        "expertise": best.expertise, "resistance": best.resistance, "hp": best.hp, "height": best.height
     }
 
     return worst_in_gen
@@ -48,14 +48,14 @@ def collect_average_in_gen(gen):
         strength_sum += elem.strength
         agility_sum += elem.agility
         expertise_sum += elem.expertise
-        resistance_sum += elem.resistence
+        resistance_sum += elem.resistance
         hp_sum += elem.hp
         height_sum += elem.height
 
     gen_size = len(gen)
     resp = {
         "performance": performance_sum / gen_size, "strength": strength_sum / gen_size, "agility": agility_sum / gen_size,
-        "expertise": expertise_sum / gen_size, "resistence": resistance_sum / gen_size, "hp": hp_sum / gen_size, "height": height_sum / gen_size
+        "expertise": expertise_sum / gen_size, "resistance": resistance_sum / gen_size, "hp": hp_sum / gen_size, "height": height_sum / gen_size
     }
 
     return resp

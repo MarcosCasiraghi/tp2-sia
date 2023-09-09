@@ -13,9 +13,9 @@ def valid_height(height):
     return 1.3 <= height <= 2.0
 
 
-def valid_attribute(strength, agility, expertise, resistence, hp):
-    return (0 < strength < 150 and 0 < agility < 150 and 0 < expertise < 150 and 0 < resistence < 150 and 0 < hp < 150
-            and - DELTA <= strength + agility + expertise + resistence + hp - 150 <= DELTA)
+def valid_attribute(strength, agility, expertise, resistance, hp):
+    return (0 < strength < 150 and 0 < agility < 150 and 0 < expertise < 150 and 0 < resistance < 150 and 0 < hp < 150
+            and - DELTA <= strength + agility + expertise + resistance + hp - 150 <= DELTA)
 
 
 def scale_array_to_sum(arr):
@@ -49,8 +49,8 @@ def scale_array_to_sum(arr):
 
 class Fighter(ABC):
     @abstractmethod
-    def __init__(self, attack_lambda, defence_lambda, strength, agility, expertise, resistence, hp, height):
-        if not valid_attribute(strength, agility, expertise, resistence, hp):
+    def __init__(self, attack_lambda, defence_lambda, strength, agility, expertise, resistance, hp, height):
+        if not valid_attribute(strength, agility, expertise, resistance, hp):
             raise ValueError("Invalid attributes for character")
 
         if not valid_height(height):
@@ -62,7 +62,7 @@ class Fighter(ABC):
         self.strength = strength
         self.agility = agility
         self.expertise = expertise
-        self.resistence = resistence
+        self.resistance = resistance
         self.hp = hp
 
         self.height = height
@@ -82,7 +82,7 @@ class Fighter(ABC):
         return (self.get_agility() + self.get_expertise()) * self.get_strength() * self.get_atm_mod()
 
     def get_defense(self):
-        return (self.get_resistence() + self.get_expertise()) * self.get_hp() * self.get_dem_mod()
+        return (self.get_resistance() + self.get_expertise()) * self.get_hp() * self.get_dem_mod()
 
     def get_strength(self):
         return 100 * tanh(0.01 * self.strength)
@@ -93,8 +93,8 @@ class Fighter(ABC):
     def get_expertise(self):
         return 0.6 * tanh(0.01 * self.expertise)
 
-    def get_resistence(self):
-        return tanh(0.01 * self.resistence)
+    def get_resistance(self):
+        return tanh(0.01 * self.resistance)
 
     def get_hp(self):
         return 100 * tanh(0.01 * self.hp)
@@ -110,7 +110,7 @@ class Fighter(ABC):
         elif idx == 2:
             return self.expertise
         elif idx == 3:
-            return self.resistence
+            return self.resistance
         elif idx == 4:
             return self.hp
         elif idx == 5:
@@ -127,7 +127,7 @@ class Fighter(ABC):
         elif idx == 2:
             self.expertise = value
         elif idx == 3:
-            self.resistence = value
+            self.resistance = value
         elif idx == 4:
             self.hp = value
         elif idx == 5:
@@ -142,7 +142,7 @@ class Fighter(ABC):
             self.height = 1.3
 
         # Reajustamos los otros genes
-        current_genes = [self.strength, self.agility, self.expertise, self.resistence, self.hp]
+        current_genes = [self.strength, self.agility, self.expertise, self.resistance, self.hp]
         scaled = scale_array_to_sum(current_genes)
 
         for idx, value in enumerate(scaled):
@@ -151,30 +151,30 @@ class Fighter(ABC):
         self.performance = self.calc_performance()
 
     def __str__(self):
-        return f"strength: {self.strength}, agility: {self.agility}, expertise: {self.expertise}, resistance: {self.resistence}, hp: {self.hp}, height: {self.height}, performance: {self.performance}"
+        return f"strength: {self.strength}, agility: {self.agility}, expertise: {self.expertise}, resistance: {self.resistance}, hp: {self.hp}, height: {self.height}, performance: {self.performance}"
 
     def __lt__(self, other):
         return self.performance < other.performance
 
 
 class Warrior(Fighter):
-    def __init__(self, strength, agility, expertise, resistence, hp, height):
-        super().__init__(0.6, 0.4, strength, agility, expertise, resistence, hp, height)
+    def __init__(self, strength, agility, expertise, resistance, hp, height):
+        super().__init__(0.6, 0.4, strength, agility, expertise, resistance, hp, height)
 
 
 class Archer(Fighter):
-    def __init__(self, strength, agility, expertise, resistence, hp, height):
-        super().__init__(0.9, 0.1, strength, agility, expertise, resistence, hp, height)
+    def __init__(self, strength, agility, expertise, resistance, hp, height):
+        super().__init__(0.9, 0.1, strength, agility, expertise, resistance, hp, height)
 
 
 class Defensor(Fighter):
-    def __init__(self, strength, agility, expertise, resistence, hp, height):
-        super().__init__(0.1, 0.9, strength, agility, expertise, resistence, hp, height)
+    def __init__(self, strength, agility, expertise, resistance, hp, height):
+        super().__init__(0.1, 0.9, strength, agility, expertise, resistance, hp, height)
 
 
 class Infilitrate(Fighter):
-    def __init__(self, strength, agility, expertise, resistence, hp, height):
-        super().__init__(0.8, 0.3, strength, agility, expertise, resistence, hp, height)
+    def __init__(self, strength, agility, expertise, resistance, hp, height):
+        super().__init__(0.8, 0.3, strength, agility, expertise, resistance, hp, height)
 
 
 class Genes(Enum):

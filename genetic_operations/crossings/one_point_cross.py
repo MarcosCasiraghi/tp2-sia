@@ -4,13 +4,6 @@ from genetic_operations.crossings.cross_utils import cross_population
 from genetic_operations.crossings.anular_cross import get_crossing_data
 
 
-# self.strength = strength
-# self.agility = agility
-# self.expertise = expertise
-# self.resistence = resistence
-# self.hp = hp
-
-
 def one_point_cross_parents(parent1: Fighter, parent2: Fighter, recievedPoint=0):
     child1_array, child2_array, recievedPoint, array_length = get_crossing_data(parent1, parent2)
 
