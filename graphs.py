@@ -1,6 +1,8 @@
 import json
 import os
 import plotly.graph_objects as go
+import plotly.figure_factory as ff
+import pandas as pd
 
 
 def generate_gene_variation_graph(results):
@@ -24,6 +26,7 @@ def generate_gene_variation_graph(results):
 
     fig = go.Figure(data=traces, layout=layout)
     fig.show()
+
 
 def generate_variation_rate_of_change_graph(results):
 
@@ -79,6 +82,35 @@ def generate_best_performance_graph(results):
     fig.show()
 
 
+def generate_heatmap_correlation_graph(results):
+    data = {
+        'Generation': list(range(0, len(results["strength_variation"]))),
+        'Strength Variation': results["strength_variation"],
+        'Agility Variation': results["agility_variation"],
+        'Expertise Variation': results["expertise_variation"],
+        'Resistance Variation': results["resistance_variation"],
+        'HP Variation': results["hp_variation"],
+    }
+
+    df = pd.DataFrame(data)
+    correlation_matrix = df[
+        ['Strength Variation', 'Agility Variation', 'Expertise Variation', 'Resistance Variation', 'HP Variation']
+    ].corr()
+    heatmap = ff.create_annotated_heatmap(
+        z=correlation_matrix.values,
+        x=list(correlation_matrix.columns),
+        y=list(correlation_matrix.index),
+        colorscale='Viridis',
+    )
+    heatmap.update_layout(
+        title='Correlation Heatmap Between Performance Metrics and Gene Variations',
+        xaxis=dict(title='Metrics and Gene Variations'),
+        yaxis=dict(title='Metrics and Gene Variations'),
+    )
+
+    heatmap.show()
+
+
 # Genera graficos de los resultados especificados (o usa el ultimo set de resultados)
 def generate_graphs(file_name=None):
     if file_name is None:
@@ -93,6 +125,7 @@ def generate_graphs(file_name=None):
     generate_best_performance_graph(results)
     generate_gene_variation_graph(results)
     generate_variation_rate_of_change_graph(results)
+    generate_heatmap_correlation_graph(results)
 
 
 generate_graphs()
