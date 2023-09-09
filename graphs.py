@@ -82,7 +82,7 @@ def generate_best_performance_graph(results):
     fig.show()
 
 
-def generate_heatmap_correlation_graph(results):
+def generate_heatmap_gene_variation_graph(results):
     data = {
         'Generation': list(range(0, len(results["strength_variation"]))),
         'Strength Variation': results["strength_variation"],
@@ -103,9 +103,37 @@ def generate_heatmap_correlation_graph(results):
         colorscale='Viridis',
     )
     heatmap.update_layout(
-        title='Correlation Heatmap Between Performance Metrics and Gene Variations',
+        title='Correlation Heatmap Between Gene Variations',
         xaxis=dict(title='Metrics and Gene Variations'),
         yaxis=dict(title='Metrics and Gene Variations'),
+    )
+
+    heatmap.show()
+
+def generate_heatmap_gene_correlation_graph(results):
+    data = {
+        'Generation': list(range(0, len(results["strength_best"]))),
+        'Strength': results["strength_best"],
+        'Agility': results["agility_best"],
+        'Expertise': results["expertise_best"],
+        'Resistance': results["resistance_best"],
+        'HP': results["hp_best"],
+    }
+
+    df = pd.DataFrame(data)
+    correlation_matrix = df[
+        ['Strength', 'Agility', 'Expertise', 'Resistance', 'HP']
+    ].corr()
+    heatmap = ff.create_annotated_heatmap(
+        z=correlation_matrix.values,
+        x=list(correlation_matrix.columns),
+        y=list(correlation_matrix.index),
+        colorscale='Viridis',
+    )
+    heatmap.update_layout(
+        title='Correlation Heatmap Between Genes',
+        xaxis=dict(title='Genes'),
+        yaxis=dict(title='Genes'),
     )
 
     heatmap.show()
@@ -149,7 +177,8 @@ def generate_graphs(file_name=None):
     generate_best_gene_graph(results)
     generate_gene_variation_graph(results)
     generate_variation_rate_of_change_graph(results)
-    generate_heatmap_correlation_graph(results)
+    generate_heatmap_gene_variation_graph(results)
+    generate_heatmap_gene_correlation_graph(results)
 
 
 generate_graphs()
