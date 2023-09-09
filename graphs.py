@@ -111,6 +111,29 @@ def generate_heatmap_correlation_graph(results):
     heatmap.show()
 
 
+def generate_best_gene_graph(results):
+
+    generations = list(range(0, len(results["strength_variation"]) + 1))
+
+    traces = [
+        go.Scatter(x=generations, y=results["strength_best"], mode='markers', name='Strength Best'),
+        go.Scatter(x=generations, y=results["agility_best"], mode='markers', name='Agility Best'),
+        go.Scatter(x=generations, y=results["expertise_best"], mode='markers', name='Expertise Best'),
+        go.Scatter(x=generations, y=results["resistance_best"], mode='markers', name='Resistance Best'),
+        go.Scatter(x=generations, y=results["hp_best"], mode='markers', name='HP Best')
+    ]
+
+    layout = go.Layout(
+        title='Genes of Best Individual Per Generation',
+        xaxis=dict(title='Generation'),
+        yaxis=dict(title='Gene Value'),
+        xaxis_range=[0, len(generations) - 1]
+    )
+
+    fig = go.Figure(data=traces, layout=layout)
+    fig.show()
+
+
 # Genera graficos de los resultados especificados (o usa el ultimo set de resultados)
 def generate_graphs(file_name=None):
     if file_name is None:
@@ -123,6 +146,7 @@ def generate_graphs(file_name=None):
         results = json.load(file)
 
     generate_best_performance_graph(results)
+    generate_best_gene_graph(results)
     generate_gene_variation_graph(results)
     generate_variation_rate_of_change_graph(results)
     generate_heatmap_correlation_graph(results)

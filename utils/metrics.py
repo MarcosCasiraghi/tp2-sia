@@ -14,7 +14,7 @@ def collect_best_in_gen(gen):
 
     best_in_gen = {
         "performance": best.performance, "strength": best.strength, "agility": best.agility,
-        "expertise": best.expertise, "resistence": best.resistence, "hp": best.hp, "height": best.height
+        "expertise": best.expertise, "resistance": best.resistence, "hp": best.hp, "height": best.height
     }
 
     return best_in_gen
@@ -25,7 +25,7 @@ def collect_worst_in_gen(gen):
 
     worst_in_gen = {
         "performance": best.performance, "strength": best.strength, "agility": best.agility,
-        "expertise": best.expertise, "resistence": best.resistence, "hp": best.hp, "height": best.height
+        "expertise": best.expertise, "resistance": best.resistence, "hp": best.hp, "height": best.height
     }
 
     return worst_in_gen
@@ -39,7 +39,7 @@ def collect_average_in_gen(gen):
     strength_sum = 0
     agility_sum = 0
     expertise_sum = 0
-    resistence_sum = 0
+    resistance_sum = 0
     hp_sum = 0
     height_sum = 0
 
@@ -48,14 +48,14 @@ def collect_average_in_gen(gen):
         strength_sum += elem.strength
         agility_sum += elem.agility
         expertise_sum += elem.expertise
-        resistence_sum += elem.resistence
+        resistance_sum += elem.resistence
         hp_sum += elem.hp
         height_sum += elem.height
 
     gen_size = len(gen)
     resp = {
         "performance": performance_sum / gen_size, "strength": strength_sum / gen_size, "agility": agility_sum / gen_size,
-        "expertise": expertise_sum / gen_size, "resistence": resistence_sum / gen_size, "hp": hp_sum / gen_size, "height": height_sum / gen_size
+        "expertise": expertise_sum / gen_size, "resistence": resistance_sum / gen_size, "hp": hp_sum / gen_size, "height": height_sum / gen_size
     }
 
     return resp
@@ -82,6 +82,14 @@ def initialize_metrics(config, metrics):
     metrics["best_performance_list"] = []
     metrics["worst_performance_list"] = []
     metrics["average_performance_list"] = []
+
+    metrics["strength_best"] = []
+    metrics["agility_best"] = []
+    metrics["expertise_best"] = []
+    metrics["resistance_best"] = []
+    metrics["hp_best"] = []
+    metrics["height_best"] = []
+
     for gen in Genes:
         metrics[f"{gen.name.lower()}_variation"] = []
 
@@ -90,11 +98,29 @@ def collect_time_metrics(start, end, metrics):
     metrics["execution_time"] = end - start
 
 
+def collect_best_genes(metrics, best):
+    metrics["strength_best"].append(best["strength"])
+    metrics["agility_best"].append(best["agility"])
+    metrics["expertise_best"].append(best["expertise"])
+    metrics["resistance_best"].append(best["resistance"])
+    metrics["hp_best"].append(best["hp"])
+    metrics["height_best"].append(best["height"])
+
+
 def collect_metrics_running(current_gen, metrics):
+
+    # NOTAS: al parecer calcular t0do por separadao (iterando varias veces sobre la poblacion)
+    # en vez de hacer todos los calculos en una iteracion, no parece cambiar en lo mas minimo.
+    # Prueba: Iterando varias veces: 30.45 s,   Iterando 1 vez: 31.27 s
+
+    best = collect_best_in_gen(current_gen)
+
     # Calculo mejor, el peor y el promedio
-    metrics["best_performance_list"].append(collect_best_in_gen(current_gen)["performance"])
+    metrics["best_performance_list"].append(best["performance"])
     metrics["worst_performance_list"].append(collect_worst_in_gen(current_gen)["performance"])
     metrics["average_performance_list"].append(collect_average_in_gen(current_gen)["performance"])
+
+    collect_best_genes(metrics, best)
 
     # Calculo variacion en genes
     for idx, gen in enumerate(Genes):
@@ -127,7 +153,7 @@ def export_metrics(metrics):
                     "strength": 0,
                     "agility": 0,
                     "expertise": 0,
-                    "resistence": 0,
+                    "resistance": 0,
                     "hp": 0,
                     "height": 0
                 }
@@ -150,7 +176,7 @@ def export_metrics(metrics):
         best_characters[class_used]["strength"] = best_in_current["strength"]
         best_characters[class_used]["agility"] = best_in_current["agility"]
         best_characters[class_used]["expertise"] = best_in_current["expertise"]
-        best_characters[class_used]["resistence"] = best_in_current["resistence"]
+        best_characters[class_used]["resistance"] = best_in_current["resistance"]
         best_characters[class_used]["hp"] = best_in_current["hp"]
         best_characters[class_used]["height"] = best_in_current["height"]
 
