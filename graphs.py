@@ -3,6 +3,7 @@ import os
 import plotly.graph_objects as go
 import plotly.figure_factory as ff
 import pandas as pd
+import sys
 
 
 def generate_gene_variation_graph(results):
@@ -181,6 +182,6 @@ def generate_graphs(file_name=None):
     generate_heatmap_gene_correlation_graph(results)
 
 
-generate_graphs()
+generate_graphs(sys.argv[1])
 
 

@@ -15,6 +15,14 @@ pip install -r requirements.txt
 ```
 python main.py
 ```
+4) Para generar los gráficos asociados a una ejecución ejecutar:
+```
+python graphs.py <path de archivo>
+```
+o ejecutar (esta elige el último set de datos generados)
+```
+python graphs.py
+```
 
 ## Configuración:
 | Campo                    | Descripción                                                                    | Valores aceptados                                                                                                         |  
@@ -76,4 +84,3 @@ python main.py
 | acceptable_solution_cutoff   | "acceptable_fitness": fitness del mejor individuo dese ado.                                                                       |
 | content_cutoff               | "delta": diferencia minima entre mejores individuos. "max_gen_unchanged": cantidad de generaciones sin cambio en el mejor fitness |
 | structure_cutoff             | TODO                                                                                                                              |
-
