@@ -1,41 +1,29 @@
 {
-  "seed": -1,
-  "class": "Archer",
-  "generation_size": 100,
+  "seed": 1,
+  "class": "Defensor",
+  "generation_size": 30,
   "selection_method1": {
-    "method": "boltzmann_selection",
-    "temperature_0": 0.5,
-    "temperature_C": 0.3,
-    "k": 0.9
+    "method": "roulette_selection"
   },
   "selection_method2": {
-    "method": "boltzmann_selection",
-    "temperature_0": 0.5,
-    "temperature_C": 0.3,
-    "k": 0.9
+    "method": "elite_selection"
   },
-  "selection_rate_method1": 0.5,
-  "selection_size": 50,
+  "selection_rate_method1": 0.2,
+  "selection_size": 1000,
   "crossover_method": "two_point_cross",
-  "mutation_method": "mutate_uniform_multi_gen",
-  "mutation_prob": 0.05,
-  "mutation_change": 0.05,
+  "mutation_method": "mutate_complete",
+  "mutation_prob": 0.3,
+  "mutation_change": 0.3,
   "replacement_method1": {
-    "method": "boltzmann_selection",
-    "temperature_0": 0.5,
-    "temperature_C": 0.3,
-    "k": 0.9
+    "method": "roulette_selection"
   },
   "replacement_method2": {
-    "method": "boltzmann_selection",
-    "temperature_0": 0.5,
-    "temperature_C": 0.3,
-    "k": 0.9
+    "method": "elite_selection"
   },
-  "replacement_rate_method1": 0.5,
+  "replacement_rate_method1": 0.2,
   "favour_children": true,
   "cutoff_criteria": {
     "method": "generation_cutoff",
-    "generation_amount": 10000
+    "generation_amount": 100
   }
 }
