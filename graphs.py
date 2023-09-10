@@ -182,6 +182,6 @@ def generate_graphs(file_name=None):
     generate_heatmap_gene_correlation_graph(results)
 
 
-generate_graphs(sys.argv[1])
+generate_graphs(sys.argv[1] if len(sys.argv) >= 2 else None)
 
 
