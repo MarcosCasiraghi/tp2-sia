@@ -23,7 +23,9 @@
   "replacement_rate_method1": 0.8,
   "favour_children": true,
   "cutoff_criteria": {
-    "method": "generation_cutoff",
-    "generation_amount": 100
+    "method": "structure_cutoff",
+    "max_gen_unchanged": 3,
+    "delta": 0.001,
+    "percentage": 0.1
   }
 }
