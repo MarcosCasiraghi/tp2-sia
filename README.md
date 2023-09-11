@@ -46,15 +46,15 @@ python graphs.py
 
 
 ## Tabla 1: Metodo de seleccion y reemplazo
-| Metodo                              | Parametros                                                                                                        |
-|-------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| elite_selection                     | -                                                                                                                 | 
-| ranking_selection                   | -                                                                                                                 |
-| roulette_selection                  | -                                                                                                                 |
-| universal_selection                 | -                                                                                                                 |
-| boltzmann_selection                 | "temperature_0": La temperatura inicial. "temperature_C": Temperatura limite TODO "k": valor racional entre 0 y 1 |
-| deterministic_tournament_selection  | "m_value": Numero entero, cantidad de individuos en torneo                                                        |
-| probabilistic_tournament_selection  | "threshold": valor racional entre 0.5 y 1. Cuanto más grande, más favorece al más apto                            | 
+| Metodo                              | Parametros                                                                                                    |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| elite_selection                     | -                                                                                                             | 
+| ranking_selection                   | -                                                                                                             |
+| roulette_selection                  | -                                                                                                             |
+| universal_selection                 | -                                                                                                             |
+| boltzmann_selection                 | "temperature_0": La temperatura inicial. "temperature_C": Temperatura limite "k": valor racional entre 0 y 1  |
+| deterministic_tournament_selection  | "m_value": Numero entero, cantidad de individuos en torneo                                                    |
+| probabilistic_tournament_selection  | "threshold": valor racional entre 0.5 y 1. Cuanto más grande, más favorece al más apto                        | 
 
 ## Tabla 2: Metodo de cruza
 | Metodo             | 
