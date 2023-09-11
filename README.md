@@ -56,7 +56,7 @@ python graphs.py
 | deterministic_tournament_selection  | "m_value": Numero entero, cantidad de individuos en torneo                                                        |
 | probabilistic_tournament_selection  | "threshold": valor racional entre 0.5 y 1. Cuanto más grande, más favorece al más apto                            | 
 
-## Tabla 2: Metodo de crusa
+## Tabla 2: Metodo de cruza
 | Metodo             | 
 |--------------------|
 | anular_cross       |
@@ -76,9 +76,9 @@ python graphs.py
 
 
  ## Tabla 4: Criterio de corte
-| Metodo                       | Parametros                                                                                                                         |
-|------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| generation_cutoff            | "generation_amount": cantidad de generaciones creadas antes de cortar.                                                             | 
-| acceptable_solution_cutoff   | "acceptable_fitness": fitness del mejor individuo deseado.                                                                         |
-| content_cutoff               | "delta": diferencia minima entre mejores individuos. "max_gen_unchanged": cantidad de generaciones sin cambio en el mejor fitness  |
-| structure_cutoff             | TODO                                                                                                                               |
+| Metodo                       | Parametros                                                                                                                                                                                                                                                                               |
+|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| generation_cutoff            | "generation_amount": cantidad de generaciones creadas antes de cortar.                                                                                                                                                                                                                   | 
+| acceptable_solution_cutoff   | "acceptable_fitness": fitness del mejor individuo deseado.                                                                                                                                                                                                                               |
+| content_cutoff               | "delta": diferencia minima entre mejores individuos. "max_gen_unchanged": cantidad de generaciones sin cambio en el mejor fitness                                                                                                                                                        |
+| structure_cutoff             | "max_gen_unchanged": cantidad de generaciones pasadas a comparar con la actual. "delta": porcentaje de diferencia maximo que pueden tener los fitness entre generaciones "percentage": porcentaje de la poblacion para incluir en el X porciento con mas fitness y X porciento con menos |

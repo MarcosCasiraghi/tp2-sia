@@ -24,7 +24,7 @@
   "favour_children": true,
   "cutoff_criteria": {
     "method": "structure_cutoff",
-    "max_gen_unchanged": 3,
+    "max_gen_unchanged": 5,
     "delta": 0.001,
     "percentage": 0.1
   }
