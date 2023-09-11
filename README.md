@@ -46,41 +46,39 @@ python graphs.py
 
 
 ## Tabla 1: Metodo de seleccion y reemplazo
-| Metodo                              | Parametros                                                               |
-|-------------------------------------|--------------------------------------------------------------------------|
-| elite_selection                     | -                                                                        | 
-| ranking_selection                   | -                                                                        |
-| roulette_selection                  | -                                                                        |
-| universal_selection                 | -                                                                        |
-| boltzmann_selection                 | "temperature_0": la temperatura inicial. "temperature_C": TODO "k": TODO |
-| deterministic_tournament_selection  | "m_value": TODO                                                          |
-| probabilistic_tournament_selection  | "threshold": TODO                                                        | 
+| Metodo                              | Parametros                                                                                                        |
+|-------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| elite_selection                     | -                                                                                                                 | 
+| ranking_selection                   | -                                                                                                                 |
+| roulette_selection                  | -                                                                                                                 |
+| universal_selection                 | -                                                                                                                 |
+| boltzmann_selection                 | "temperature_0": La temperatura inicial. "temperature_C": Temperatura limite TODO "k": valor racional entre 0 y 1 |
+| deterministic_tournament_selection  | "m_value": Numero entero, cantidad de individuos en torneo                                                        |
+| probabilistic_tournament_selection  | "threshold": valor racional entre 0.5 y 1. Cuanto más grande, más favorece al más apto                            | 
 
 ## Tabla 2: Metodo de crusa
-| Metodo              | Parametros |
-|---------------------|------------|
-| anular_cross        | -          | 
-| ranking_selection   | -          |
-| one_point_cross     | -          |
-| universal_selection | -          |
-| two_point_cross     | -          |
-| uniform_cross       | -          |
+| Metodo             | 
+|--------------------|
+| anular_cross       |
+| one_point_cross    |
+| two_point_cross    |
+| uniform_cross      |
 
 
  ## Tabla 3: Metodo de mutacion
-| Metodo                    | Parametros |
-|---------------------------|------------|
-| single_gene               | -          | 
-| mutate_limited_multi_gen  | -          |
-| mutate_uniform_multi_gen  | -          |
-| mutate_complete           | -          |
+| Metodo                    |
+|---------------------------|
+| single_gene               |
+| mutate_limited_multi_gen  |
+| mutate_uniform_multi_gen  |
+| mutate_complete           |
 
 
 
  ## Tabla 4: Criterio de corte
-| Metodo                       | Parametros                                                                                                                        |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| generation_cutoff            | "generation_amount": cantidad de generaciones creadas antes de cortar.                                                            | 
-| acceptable_solution_cutoff   | "acceptable_fitness": fitness del mejor individuo dese ado.                                                                       |
-| content_cutoff               | "delta": diferencia minima entre mejores individuos. "max_gen_unchanged": cantidad de generaciones sin cambio en el mejor fitness |
-| structure_cutoff             | TODO                                                                                                                              |
+| Metodo                       | Parametros                                                                                                                         |
+|------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| generation_cutoff            | "generation_amount": cantidad de generaciones creadas antes de cortar.                                                             | 
+| acceptable_solution_cutoff   | "acceptable_fitness": fitness del mejor individuo deseado.                                                                         |
+| content_cutoff               | "delta": diferencia minima entre mejores individuos. "max_gen_unchanged": cantidad de generaciones sin cambio en el mejor fitness  |
+| structure_cutoff             | TODO                                                                                                                               |
