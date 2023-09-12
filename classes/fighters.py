@@ -172,7 +172,7 @@ class Defensor(Fighter):
         super().__init__(0.1, 0.9, strength, agility, expertise, resistance, hp, height)
 
 
-class Infilitrate(Fighter):
+class Infiltrate(Fighter):
     def __init__(self, strength, agility, expertise, resistance, hp, height):
         super().__init__(0.8, 0.3, strength, agility, expertise, resistance, hp, height)
 
@@ -190,5 +190,5 @@ class_map = {
     "Warrior": Warrior,
     "Archer": Archer,
     "Defensor": Defensor,
-    "Infilitrate": Infilitrate
+    "Infiltrate": Infiltrate
 }
